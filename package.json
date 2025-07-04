@@ -1,0 +1,11 @@
+{
+  "name": "partsmaster",
+  "version": "1.0.0",
+  "description": "An interactive tool to manage parts, assemblies, PO's and BOM's",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Coty Janeway",
+  "license": "ISC"
+}
