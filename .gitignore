@@ -1,3 +1,8 @@
+# Mine
+.env
+
+/data
+
 # Logs
 logs
 *.log
@@ -23,4 +28,3 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
