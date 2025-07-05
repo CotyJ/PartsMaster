@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "reconvert_data":"rm data/processed/* && cd scripts && python main.py",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
