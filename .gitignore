@@ -1,6 +1,5 @@
 # Mine
 .env
-
 /data
 
 # Logs
@@ -27,4 +26,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
