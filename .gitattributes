@@ -1,1 +1,27 @@
-* text=auto eol=lf
+# Catch-all rule
+* text=auto
+
+# Force LF endings for source code
+*.py  text eol=lf
+*.sql text eol=lf
+*.sh  text eol=lf
+*.js  text eol=lf
+*.ts  text eol=lf
+*.jsx text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.md  text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Leave platform-default line endings for CSVs (e.g., CRLF on Windows)
+*.csv text
+
+# Binary files — don’t touch
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
