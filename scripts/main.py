@@ -8,14 +8,14 @@ def rename_csv_remove_header(old_path, new_path):
   df = pd.read_csv(old_path)
   df.to_csv(new_path)
 
-excel_file_path = "../data/raw"
+old_path = "../data/raw"
 csv_path = "../data/processed"
 
-raw_orders_line_item_path = f"{excel_file_path}/OrdersLineItem.xlsx"
-raw_overstock_path = f"{excel_file_path}/overstock.csv"
-raw_parts_path = f"{excel_file_path}/Parts.xlsx"
-raw_production_models_path = f"{excel_file_path}/Production_models.csv"
-raw_whereused_path = f"{excel_file_path}/WhereUsed.xlsx"
+raw_orders_line_item_path = f"{old_path}/OrdersLineItem.xlsx"
+raw_overstock_path = f"{old_path}/overstock.csv"
+raw_parts_path = f"{old_path}/Parts.xlsx"
+raw_production_models_path = f"{old_path}/Production_models.csv"
+raw_whereused_path = f"{old_path}/WhereUsed.xlsx"
 
 processed_orders_line_item_path = f"{csv_path}/orders_line_item.csv"
 processed_overstock_path = f"{csv_path}/overstock.csv"
