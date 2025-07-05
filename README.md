@@ -1,3 +1,5 @@
+I advise against opening WhereUsed.xlsx since it has around 250,000 lines and is fairly unweildy.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
