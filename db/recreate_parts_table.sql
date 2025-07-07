@@ -51,3 +51,6 @@ CREATE TABLE parts (
 	supplier_part_number1 TEXT,
 	supplier_1_EXTRA TEXT
 );
+
+-- Import query command
+\copy parts FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\processed\parts.csv' DELIMITER ',' CSV HEADER;

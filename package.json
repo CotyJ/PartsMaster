@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "reconvert_data":"rm data/processed/* && cd scripts && python main.py",
+    "clean_parts":"python scripts/clean_parts_CSV.py",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
