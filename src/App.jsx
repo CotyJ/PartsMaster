@@ -1,26 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css';
 import axios from 'axios';
 
-// const axios = require('axios');
-
 function App() {
 
-  const [search, setSearch] = useState(null);
+  const [searchEntry, setSearchEntry] = useState(true);
+  const [partData, setPartData] = useState(null);
 
-  const get_sample_part = () => {
+  const get_part = () => {
+    // console.log(searchEntry);
+
     axios.get('http://localhost:6969/search')
       .then((response) => {
-        const { data } = response;
-        console.log(data[0].part_number)
-        setSearch(data[0].part_number)
+        const partData = response.data;
+        console.log(partData[0].part_number)
+        setPartData(partData[0].part_number)
       })
       .catch((err) => console.log(err, " Error on front-end request"))
-      .finally(() => console.log("done i guess"));
+      .finally()
   }
-
-  get_sample_part()
-
 
     // useEffect( () => {
     //
@@ -30,9 +28,11 @@ function App() {
     <>
       <div>
         <div>Hello</div>
-        <input type="search" id="search-bar"></input>
-        <button onClick={get_sample_part}>GET</button>
-        <div>{search}</div>
+          <fieldset>
+            <legend>Search Bar</legend>
+            <input type="search" id="search-bar" onChange={get_part} placeholder='ex: 43205-2304'></input>
+          </fieldset>
+        <div>{partData}</div>
       </div>
     </>
   )

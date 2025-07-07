@@ -6,29 +6,31 @@ var cors = require('cors')
 
 app.use(cors())
 app.use(express.json())
+
+// When making a build
 // app.use(express.static(path.join(__dirname, '../public')));
 
 
 // Main Page
-app.get('/', (req,res) => {
-  console.log("Home Page");
-  res.status(200).json({a: 'success'})
-})
+// app.get('/', (req,res) => {
+//   console.log("Home Page");
+//   res.status(200).json({a: 'success'})
+// })
 
 
 // Get all because fuck it
-app.get('/getall', async (req,res) => {
-  try {
-    const results = await db.query(`
-      SELECT * FROM parts
-      LIMIT 10
-      `)
-      res.json(results.rows);
-    } catch (err) {
-      console.log("error...");
-      res.status(500).json({error: "error..."})
-    }
-})
+// app.get('/getall', async (req,res) => {
+//   try {
+//     const results = await db.query(`
+//       SELECT * FROM parts
+//       LIMIT 10
+//       `)
+//       res.json(results.rows);
+//     } catch (err) {
+//       console.log("error...");
+//       res.status(500).json({error: "error..."})
+//     }
+// })
 
 // Search
 app.get('/search', async (req, res) => {
