@@ -2,7 +2,7 @@
 DROP TABLE if exists parts;
 
 CREATE TABLE parts (
-	id INT PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	user_name TEXT,
 	part_number TEXT UNIQUE NOT NULL,
 	part_description TEXT,
