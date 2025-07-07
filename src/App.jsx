@@ -1,28 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css';
 import axios from 'axios';
 
 function App() {
 
   const [searchEntry, setSearchEntry] = useState(true);
-  const [partData, setPartData] = useState(null);
+  const [partData, setPartData] = useState([]);
 
   const get_part = () => {
-    // console.log(searchEntry);
-
-    axios.get('http://localhost:6969/search')
-      .then((response) => {
-        const partData = response.data;
-        console.log(partData[0].part_number)
-        setPartData(partData[0].part_number)
-      })
+    const url = 'http://localhost:6969/search_parts?q='
+    axios.get(`${url}${searchEntry}`)
+      .then((response) =>  setPartData(response.data))
       .catch((err) => console.log(err, " Error on front-end request"))
       .finally()
   }
 
-    // useEffect( () => {
-    //
-    // }, [])
+    useEffect( () => {
+      get_part()
+    }, [searchEntry])
 
   return (
     <>
@@ -30,9 +25,13 @@ function App() {
         <div>Hello</div>
           <fieldset>
             <legend>Search Bar</legend>
-            <input type="search" id="search-bar" onChange={get_part} placeholder='ex: 43205-2304'></input>
+            <input type="search" id="search-bar" onChange={(e) => setSearchEntry(e.target.value)} placeholder='ex: 43205-2304'></input>
           </fieldset>
-        <div>{partData}</div>
+          <div>
+            {partData.map( (part) => (
+              <div key={part.part_number}>{part.part_number}</div>
+              ))}
+          </div>
       </div>
     </>
   )
