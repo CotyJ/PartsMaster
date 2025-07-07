@@ -33,14 +33,12 @@ app.use(express.json())
 // })
 
 // Search
-app.get('/search', async (req, res) => {
+app.get('/search_parts', async (req, res) => {
   console.log('Searching...');
 
   try {
-  // const { q } = req.query;
+  const { q } = req.query;
 
-  // test query
-  const q = "43205-2304"
 
   const results = await db.query(`
     SELECT * FROM parts
