@@ -1,14 +1,62 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 9999
 const db = require('../db');
+const PORT = process.env.PORT || 9999
+var cors = require('cors')
+
+app.use(cors())
+app.use(express.json())
+// app.use(express.static(path.join(__dirname, '../public')));
 
 
-
-// Main request
-app.get('/', (req, res) => {
-  console.log("Home page");
+// Main Page
+app.get('/', (req,res) => {
+  console.log("Home Page");
+  res.status(200).json({a: 'success'})
 })
+
+
+// Get all because fuck it
+app.get('/getall', async (req,res) => {
+  try {
+    const results = await db.query(`
+      SELECT * FROM parts
+      LIMIT 10
+      `)
+      res.json(results.rows);
+    } catch (err) {
+      console.log("error...");
+      res.status(500).json({error: "error..."})
+    }
+})
+
+// Search
+app.get('/search', async (req, res) => {
+  console.log('Searching...');
+
+  try {
+  // const { q } = req.query;
+
+  // test query
+  const q = "43205-2304"
+
+  const results = await db.query(`
+    SELECT * FROM parts
+    WHERE part_number ILIKE $1
+    ORDER BY part_number
+    LIMIT 20
+    `, [`%${q}%`]);
+
+    console.log(`Searching for ${q}`);
+    res.json(results.rows);
+
+    // Catch
+  } catch (err) {
+    console.error("ERROR");
+    res.status(500).json({ error: 'Server error...'});
+  }
+});
+
 
 // Get all parts
 
@@ -24,5 +72,5 @@ app.get('/parts/:part_number', async (req, res) => {
 
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App listening on port ${PORT}`)
 })
