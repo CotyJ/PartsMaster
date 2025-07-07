@@ -2,7 +2,7 @@
 DROP TABLE if exists parts;
 
 CREATE TABLE parts (
-	id INT PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	user_name TEXT,
 	part_number TEXT UNIQUE NOT NULL,
 	part_description TEXT,
@@ -51,3 +51,6 @@ CREATE TABLE parts (
 	supplier_part_number1 TEXT,
 	supplier_1_EXTRA TEXT
 );
+
+-- Import query command
+\copy parts FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\processed\parts.csv' DELIMITER ',' CSV HEADER;
