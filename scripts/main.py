@@ -1,12 +1,14 @@
+import os
 import pandas as pd
 
 from convert_xlsx_to_csv import convert_xlsx_to_csv
 
+base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Renames CSV for consistency and removes header, since I am defining the columns in postgres
 def rename_csv_remove_header(old_path, new_path):
   df = pd.read_csv(old_path)
-  df.to_csv(new_path)
+  df.to_csv(new_path, index=False)
 
 old_path = "../data/raw"
 csv_path = "../data/processed"
