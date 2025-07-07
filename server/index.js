@@ -10,6 +10,17 @@ app.use(express.json())
 // When making a build
 // app.use(express.static(path.join(__dirname, '../public')));
 
+// All parts for initial load
+app.get('/search_parts/all', async (req,res) => {
+  try {
+    const results = await db.query(`SELECT * FROM parts ORDER BY part_number`)
+    res.json(results.rows);
+  } catch (err) {
+    console.log(err);
+
+  }
+
+})
 
 // Search
 app.get('/search_parts', async (req, res) => {
