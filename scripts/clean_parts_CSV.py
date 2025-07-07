@@ -7,6 +7,7 @@ parts_data_path = os.path.join(base_dir, "..", "data", "processed", "parts.csv")
 df = pd.read_csv(parts_data_path)
 
 columns_rename = {
+  'Unnamed: 0':'id',
   'UserName':'user_name',
   'PartNumber':'part_number',
   'PartDescription':'part_description',
