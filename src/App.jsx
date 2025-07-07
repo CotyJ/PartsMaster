@@ -7,6 +7,14 @@ function App() {
   const [searchEntry, setSearchEntry] = useState(true);
   const [partData, setPartData] = useState([]);
 
+const fetch_initial_data = () => {
+    const url = 'http://localhost:6969/search_parts/all'
+    axios.get(`${url}`)
+      .then((response) =>  setPartData(response.data))
+      .catch((err) => console.log(err, " Error on front-end request"))
+      .finally()
+}
+
   const get_part = () => {
     const url = 'http://localhost:6969/search_parts?q='
     axios.get(`${url}${searchEntry}`)
@@ -16,7 +24,13 @@ function App() {
   }
 
     useEffect( () => {
-      get_part()
+      fetch_initial_data()
+    }, [])
+
+    useEffect( () => {
+      if (searchEntry && searchEntry.length > 0) {
+        get_part()
+    }
     }, [searchEntry])
 
   return (
