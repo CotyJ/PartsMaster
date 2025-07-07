@@ -33,6 +33,7 @@ function App() {
 
     // Search when search box changes values
     useEffect( () => {
+      // BUG:  when deleting all entry, it keeps the first number and does not properly clear
       if (searchEntry && searchEntry.length > 0) {
         get_part()
     }
@@ -40,7 +41,7 @@ function App() {
 
   return (
     <>
-      <PartsTable partData={partData}/>
+      <PartsTable partData={partData} setSearchEntry={setSearchEntry}/>
     </>
   )
 }
