@@ -8,10 +8,12 @@ export default function Layout() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/parts-table">Parts Lookup</Link></li>
           <li><Link to="/orders">Orders</Link></li>
+          <li><Link to="/kb-checkin">Kanban</Link></li>
+          <li><Link to="/parts-receiving">Parts Receiving</Link></li>
         </ul>
       </nav>
 
-      {/* <Outlet /> */}
+      <Outlet />
     </>
   )
 }
