@@ -5,22 +5,21 @@ export default function PartsTable() {
 
   const [searchEntry, setSearchEntry] = useState(true);
   const [partData, setPartData] = useState([]);
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   // Fetch all parts for initial load
   const fetch_initial_data = () => {
-    const url = 'http://localhost:6969/search_parts/all'
-    axios.get(`${url}`)
+    axios.get(`${BASE_URL}/search_parts/all`)
       .then((response) =>  setPartData(response.data))
-      .catch((err) => console.log(err, " Error on front-end request"))
+      .catch((err) => console.log(err, " Error getting initial data"))
       .finally()
   }
 
   // Get one part
   const get_part = () => {
-    const url = 'http://localhost:6969/search_parts?q='
-    axios.get(`${url}${searchEntry}`)
+    axios.get(`${BASE_URL}/search_parts?q=${searchEntry}`)
       .then((response) =>  setPartData(response.data))
-      .catch((err) => console.log(err, " Error on front-end request"))
+      .catch((err) => console.log(err, " Error getting part"))
       .finally()
   }
 
