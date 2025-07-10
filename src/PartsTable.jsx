@@ -43,27 +43,31 @@ export default function PartsTable() {
         <input
           type="search"
           id="search-bar"
+          className='m-3 p-2 mx-0 rounded'
           onChange={(e) => setSearchEntry(e.target.value)}
           placeholder="ex: 43205-2304"
         ></input>
       </fieldset>
 
-      <table className="table table-dark table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Part Number</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {partData.map((part) => (
-            <tr key={part.id} className="">
-              <td>{part.part_number}</td>
-              <td className="">{part.part_description}</td>
+      <div className="overflow-y-auto" style={{maxHeight: '580px'}}>
+        <table className="table table-dark table-striped table-hover text-start mw-100" >
+          <thead>
+            <tr>
+              {/* // BUG: Annoying table width changes slightly when entering search */}
+              <th className='text-start col-2' scope="col" >Part Number</th>
+              <th className='text-start col-10' scope="col" >Description</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {partData.map((part) => (
+              <tr key={part.id} className="">
+                <td>{part.part_number}</td>
+                <td className="">{part.part_description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
