@@ -26,7 +26,7 @@ export default function PartsTable() {
 
   // Initial page load
   useEffect(() => {
-    fetch_initial_data();
+    // fetch_initial_data();
   }, []);
 
   // Search when search box changes values
