@@ -10,6 +10,7 @@ import PartsReceiving from './PartsReceiving';
 import './App.css';
 
 function App() {
+  // TODO: App is just a middle-man for main.jsx, all of this content can just be moved there
 
   return (
     <BrowserRouter>

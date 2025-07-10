@@ -14,7 +14,7 @@ app.use(express.json())
 // All parts for initial load
 app.get('/search_parts/all', async (req,res) => {
   try {
-    const results = await db.query(`SELECT * FROM parts ORDER BY part_number`)
+    const results = await db.query(`SELECT * FROM parts WHERE part_name != 'DNS' ORDER BY part_number limit 100`)
     res.json(results.rows);
   } catch (err) {
     console.log(err);
@@ -32,8 +32,9 @@ app.get('/search_parts', async (req, res) => {
   const results = await db.query(`
     SELECT * FROM parts
     WHERE part_number ILIKE $1
+    OR part_description ILIKE $1
     ORDER BY part_number
-    LIMIT 20
+    LIMIT 100
     `, [`%${q}%`]);
 
     console.log(`Searching for ${q}`);
