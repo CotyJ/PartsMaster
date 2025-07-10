@@ -34,7 +34,7 @@ app.get('/search_parts', async (req, res) => {
     WHERE part_number ILIKE $1
     OR part_description ILIKE $1
     ORDER BY part_number
-    LIMIT 20
+    LIMIT 100
     `, [`%${q}%`]);
 
     console.log(`Searching for ${q}`);

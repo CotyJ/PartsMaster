@@ -22,7 +22,8 @@ a {
 }
 
 .nav-item:hover {
-  background-image: linear-gradient(to right,  #4389d5, rgb(36, 45, 143));
+  background-image:
+    linear-gradient(to right,  #4389d5, rgb(32, 38, 106));
 }
 
 table {
@@ -46,9 +47,9 @@ table:hover{
 }
 
 .table {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox, Safari 18.2+, Chromium 121+ */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 .table::-webkit-scrollbar {
-    display: none;  /* Older Safari and Chromium */
+    display: none;
 }
