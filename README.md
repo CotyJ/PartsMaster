@@ -1,4 +1,5 @@
-I advise against opening WhereUsed.xlsx since it has around 250,000 lines and is fairly unweildy.
+> [!CAUTION]
+> I advise against opening `WhereUsed.xlsx` since it has around 250,000 lines and is fairly unwieldy.
 
 # React + Vite
 
