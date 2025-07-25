@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "reconvert_data": "rm data/processed/* && cd scripts && python main.py",
-    "clean_parts": "python scripts/clean_parts_CSV.py",
+    "reconvert_data": "rm -f data/processed/* 2>/dev/null || true && python scripts/main.py",
+    "redo_data": "rm -f data/processed/* && python scripts/main.py",
+    "clean_parts_and_prod": "python scripts/clean_parts_CSV.py && python scripts/clean_production_models_CSV.py",
     "start-server": "node --watch server/index.js",
     "build": "vite build",
     "lint": "eslint .",
