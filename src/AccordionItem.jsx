@@ -5,7 +5,7 @@ export default function AccordionItem({ part }) {
   const booleanVals = ['dchapman_ok', 'dkrich_ok'];
 
   return (
-    <div className="row">
+    <div className="row" style={{backgroundColor: "rgb(69, 69, 69)", margin:'0.5rem'}}>
       {Object.keys(part)
         .filter((key) => !filteredKeys.includes(key))
         .map((key) => {
