@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
+import AccordionItem from './AccordionItem';
 
 export default function PartsTable() {
   const [searchEntry, setSearchEntry] = useState(true);
@@ -67,7 +68,7 @@ export default function PartsTable() {
                 </tr>
                 <tr id={`${part.id}`} className='collapse'>
                   <td colSpan={"2"} className='accordion-body'>
-                    <div>something?</div>
+                    <AccordionItem part={part} />
                   </td>
                 </tr>
               </>
