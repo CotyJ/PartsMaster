@@ -6,6 +6,19 @@ export default function AccordionItem({ part }) {
 
   return (
     <div className="row" style={{backgroundColor: "rgb(69, 69, 69)", margin:'0.5rem'}}>
+
+
+      <div className="col-3">
+        <h3>WhereUsed</h3>
+        <div>
+          <div>some table items</div>
+          <div>some table items</div>
+          <div>some table items</div>
+          <div>some table items</div>
+        </div>
+      </div>
+      <div className="col-9">
+        <div className="row">
       {Object.keys(part)
         .filter((key) => !filteredKeys.includes(key))
         .map((key) => {
@@ -24,6 +37,8 @@ export default function AccordionItem({ part }) {
             </div>
           ) : null;
         })}
+        </div>
+        </div>
     </div>
   );
 }
