@@ -4,6 +4,9 @@ export default function AccordionItem({ part }) {
   const filteredKeys = ['id', 'part_number', 'part_description', 'user_name'];
   const booleanVals = ['dchapman_ok', 'dkrich_ok'];
 
+// TODO: add useEffect for where_used search
+// something like "SELECT DISTINCT bom_model from where_used WHERE part_number='part_number"
+
   return (
     <div className="row" style={{backgroundColor: "rgb(69, 69, 69)", margin:'0.5rem'}}>
 
