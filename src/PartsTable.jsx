@@ -60,10 +60,17 @@ export default function PartsTable() {
           </thead>
           <tbody>
             {partData.map((part) => (
-              <tr key={part.id} className="">
-                <td>{part.part_number}</td>
-                <td className="">{part.part_description}</td>
-              </tr>
+              <>
+                <tr key={part.id} className="" data-bs-toggle="collapse" data-bs-target={`#${part.id}`}>
+                  <td>{part.part_number}</td>
+                  <td className="">{part.part_description}</td>
+                </tr>
+                <tr id={`${part.id}`} className='collapse'>
+                  <td colSpan={"2"} className='accordion-body'>
+                    <div>something?</div>
+                  </td>
+                </tr>
+              </>
             ))}
           </tbody>
         </table>
