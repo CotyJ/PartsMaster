@@ -9,7 +9,9 @@ export default function AccordionItem({ part, where_used }) {
       <div className="col-3">
         <h3>WhereUsed</h3>
         <ul>
-          {where_used.map((item) => (
+          {where_used
+          .filter((item) => item.bom_model !== null)
+          .map((item) => (
             <li>{`${item.bom_model}`}</li>
           ))}
         </ul>
