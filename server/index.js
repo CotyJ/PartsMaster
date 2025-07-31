@@ -25,8 +25,6 @@ app.get('/search_parts/all', async (req, res) => {
 
 // Search
 app.get('/search_parts', async (req, res) => {
-  console.log('Searching...');
-
   try {
     const { q } = req.query;
     const results = await db.query(
@@ -89,8 +87,6 @@ app.get('/search_parts', async (req, res) => {
     `,
       [`%${q}%`]
     );
-
-    console.log(`Searching for ${q}`);
     res.json(results.rows);
   } catch (err) {
     console.error('ERROR');

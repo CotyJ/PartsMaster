@@ -1,14 +1,12 @@
-import { React, useState, useEffect, Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AccordionItem from './AccordionItem';
 
 export default function PartsTable() {
   const [searchEntry, setSearchEntry] = useState(true);
   const [partData, setPartData] = useState([]);
-  const [whereUsed, setWhereUsed] = useState([]);
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  // Get one part
   const get_part = () => {
     axios
       .get(`${BASE_URL}/search_parts?q=${searchEntry}`)
@@ -17,7 +15,6 @@ export default function PartsTable() {
       .finally();
   };
 
-  // Search when search box changes values
   useEffect(() => {
     // BUG:  when deleting all entry, it keeps the first number and does not properly clear
     if (searchEntry && searchEntry.length > 0) {
