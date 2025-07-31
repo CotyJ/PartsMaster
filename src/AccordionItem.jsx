@@ -1,20 +1,18 @@
-import { useState } from "react";
-import axios from "axios";
-
+import { useState } from 'react';
+import axios from 'axios';
 
 export default function AccordionItem({ part }) {
   const [whereUsed, setWhereUsed] = useState([]);
 
-  const filteredKeys = ['id', 'part_number', 'part_description', 'user_name'];
+  const filteredKeys = ['id', 'part_number', 'part_description'];
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const get_where_used = (value) => {
     axios
       .get(`${BASE_URL}/search_where_used?q=${value}`)
       .then((response) => setWhereUsed(response.data))
-      .catch((err) => console.log(err, ' Error getting part'))
+      .catch((err) => console.log(err, ' Error getting part'));
   };
-
 
   return (
     <>
@@ -30,10 +28,10 @@ export default function AccordionItem({ part }) {
         <td colSpan={'2'} className="accordion-body">
           <div
             className="row"
-            style={{ backgroundColor: 'rgb(69, 69, 69)', margin: '0.5rem' }}
+            style={{ backgroundColor: 'rgb(69, 69, 69)', margin: '0.2rem', borderRadius: '8px' }}
           >
             <div className="col-3">
-              <h3>WhereUsed</h3>
+              <h3>Used in...</h3>
               <ul>
                 {whereUsed
                   .filter((item) => item.bom_model !== null)
@@ -60,7 +58,7 @@ export default function AccordionItem({ part }) {
                         <h4 style={{ borderBottom: '1px solid white' }}>
                           {key}
                         </h4>
-                        <div>{displayValue}</div>
+                        <div style={{ overflow: 'auto' }}>{displayValue}</div>
                       </div>
                     ) : null;
                   })}

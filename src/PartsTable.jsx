@@ -41,7 +41,6 @@ export default function PartsTable() {
         <table className="table table-dark table-striped table-hover text-start mw-100">
           <thead>
             <tr>
-              {/* // BUG: Annoying table width changes slightly when entering search */}
               <th className="text-start col-2" scope="col">
                 Part Number
               </th>
