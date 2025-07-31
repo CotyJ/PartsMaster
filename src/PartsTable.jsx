@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import AccordionItem from './AccordionItem';
 
@@ -15,19 +15,6 @@ export default function PartsTable() {
       .then((response) => setPartData(response.data))
       .catch((err) => console.log(err, ' Error getting part'))
       .finally();
-  };
-
-  const get_where_used = (value) => {
-    // BUG: getting null values at the bottom due to empty rows
-    // BUG: on initial load (which happens after click), initially shows all models before being filtered
-    axios
-      .get(`${BASE_URL}/search_where_used?q=${value}`)
-      .then((response) => {
-        setWhereUsed(response.data);
-        console.log(whereUsed);
-      })
-      .catch((err) => console.log(err, ' Error getting part'))
-      .finally(console.log(whereUsed));
   };
 
   // Search when search box changes values
@@ -65,26 +52,7 @@ export default function PartsTable() {
           </thead>
           <tbody>
             {partData.map((part) => (
-              <>
-                <tr
-                  key={part.id}
-                  data-bs-toggle="collapse"
-                  data-bs-target={`#${part.id}`}
-                  onClick={() => get_where_used(part.part_number)}
-                >
-                  <td>{part.part_number}</td>
-                  <td className="">{part.part_description}</td>
-                </tr>
-                <tr id={`${part.id}`} className="collapse">
-                  <td colSpan={'2'} className="accordion-body">
-                    <AccordionItem
-                      part={part}
-                      part_number={part.part_number}
-                      where_used={whereUsed}
-                    />
-                  </td>
-                </tr>
-              </>
+              <AccordionItem key={part.part_number} part={part} />
             ))}
           </tbody>
         </table>
