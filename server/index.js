@@ -11,6 +11,7 @@ app.use(express.json())
 // When making a build
 // app.use(express.static(path.join(__dirname, '../public')));
 
+
 // All parts for initial load
 app.get('/search_parts/all', async (req,res) => {
   try {
@@ -45,6 +46,20 @@ app.get('/search_parts', async (req, res) => {
     res.status(500).json({ error: 'Server error...'});
   }
 });
+
+// Get Where Used
+app.get('/search_where_used', async (req,res) => {
+  try {
+    const { q } = req.query;
+    const results = await db.query(`SELECT bom_model FROM where_used WHERE part_number = $1 GROUP BY bom_model`, [`${q}`]);
+    res.json(results.rows)
+
+  } catch (error) {
+      console.error("ERROR");
+      res.status(500).json({ error: 'Server error...'});
+
+  }
+})
 
 
 app.listen(PORT, () => {
