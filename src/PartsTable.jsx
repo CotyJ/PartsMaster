@@ -37,7 +37,7 @@ export default function PartsTable() {
         ></input>
       </fieldset>
 
-      <div className="overflow-y-auto" style={{ maxHeight: '90vh' }}>
+      <div className="overflow-y-auto" style={{ maxHeight: '85vh' }}>
         <table className="table table-dark table-striped table-hover text-start mw-100">
           <thead>
             <tr>

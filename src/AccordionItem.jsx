@@ -27,20 +27,20 @@ export default function AccordionItem({ part }) {
       <tr id={`${part.id}`} className="collapse">
         <td colSpan={'2'} className="accordion-body">
           <div
-            className="row"
+            className="row py-2"
             style={{ backgroundColor: 'rgb(69, 69, 69)', margin: '0.2rem', borderRadius: '8px' }}
           >
-            <div className="col-3">
-              <h3>Used in...</h3>
-              <ul>
+            <div className="col-2">
+              <h3 className='text-center'>Used in...</h3>
+              <ul className='p-0'>
                 {whereUsed
                   .filter((item) => item.bom_model !== null)
                   .map((item) => (
-                    <li key={item.bom_model}>{`${item.bom_model}`}</li>
+                    <li key={item.bom_model} className='text-center'>{`${item.bom_model}`}</li>
                   ))}
               </ul>
             </div>
-            <div className="col-9">
+            <div className="col-10">
               <div className="row">
                 {Object.keys(part)
                   .filter((key) => !filteredKeys.includes(key))

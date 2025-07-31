@@ -39,7 +39,7 @@ app.get('/search_parts', async (req, res) => {
           dchapman_ok AS "Darrel OK?",
           dkrich_ok AS "Dave Krich OK?",
           TO_CHAR(date_added, 'YYYY-MM-DD') AS "Date added",
-          std_cost AS "Std Cost",
+          std_cost AS "Standard Cost",
           part_name AS "Part Name",
           part_value AS "Part Value",
           part_pwr AS "Part Power",
