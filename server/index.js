@@ -12,9 +12,9 @@ app.use(express.json());
 // app.use(express.static(path.join(__dirname, '../public')));
 
 // Search
-app.get('/search_parts', async (req, res) => {
+app.get('/parts', async (req, res) => {
   try {
-    const { q } = req.query;
+    const { part_number } = req.query;
     const results = await db.query(
       `
         SELECT
@@ -72,7 +72,7 @@ app.get('/search_parts', async (req, res) => {
         ORDER BY part_number
         LIMIT 100;
     `,
-      [`%${q}%`]
+      [`%${part_number}%`]
     );
     res.json(results.rows);
   } catch (err) {
@@ -81,29 +81,8 @@ app.get('/search_parts', async (req, res) => {
   }
 });
 
-// Single part search for Kanban
-app.get('/get_single_part', async (req, res) => {
-  try {
-    const { q } = req.query;
-    const results = await db.query(
-      `
-      SELECT
-        part_number, part_description
-      FROM parts
-      WHERE
-        part_number = $1
-      `,
-      [`${q}`]
-    );
-    res.json(results.rows[0]);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: 'Server error...' });
-  }
-});
-
 // Get kanban list
-app.get('/get_kanban_cards', async (req, res) => {
+app.get('/kanban', async (req, res) => {
   try {
     const results = await db.query(`
       SELECT
@@ -125,7 +104,27 @@ app.get('/get_kanban_cards', async (req, res) => {
 });
 
 // add kanban card
+app.put('/kanban', async (req, res) => {
+  console.log('Adding kb...');
 
+  try {
+    const { part_number } = req.query;
+    const results = await db.query(
+      `
+      INSERT INTO
+        kanban_cards
+        (part_number)
+      VALUES
+        ($1)
+      `,
+      [`${part_number}`]
+    );
+    res.json(results.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
 
 // Get Where Used
 app.get('/where_used', async (req, res) => {
