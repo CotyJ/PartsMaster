@@ -3,8 +3,7 @@ DROP TABLE if exists kanban_cards;
 CREATE TABLE kanban_cards (
   id SERIAL PRIMARY KEY UNIQUE NOT NULL,
   part_number TEXT UNIQUE NOT NULL,
-  date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
+  date_added DATE DEFAULT DATE(CURRENT_TIMESTAMP)
 );
 
 -- Fake data to populate
