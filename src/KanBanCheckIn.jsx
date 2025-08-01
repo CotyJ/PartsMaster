@@ -10,7 +10,7 @@ export default function KanBanCheckIn() {
   // get cards
   const get_kanban_cards = () => {
     axios
-      .get(`${BASE_URL}/get_kanban_cards`)
+      .get(`${BASE_URL}/kanban`)
       .then((results) => setKanbanList(results.data))
       .catch((err) => console.log(err));
   };
@@ -19,11 +19,14 @@ export default function KanBanCheckIn() {
     console.log('Search entry: ', entry);
 
     if (entry.length == 10) {
-      axios.put('/add_kanban_card').then().catch();
+      setValidEntry(entry);
+      axios.put(`${BASE_URL}/kanban/part_number=${entry}`)
+      .then(/* do something*/)
+      .catch((err) => console.log(err)
+      );
     } else {
-      // button val is off
+      setValidEntry(false);
     }
-    //if not, ignore
   };
 
   // delete part from table
@@ -42,7 +45,8 @@ export default function KanBanCheckIn() {
         onSubmit={(e) => {
           e.preventDefault();
           card_checkin(searchEntry);
-        }}>
+        }}
+      >
         <fieldset>
           <input
             type="search"
