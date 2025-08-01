@@ -11,17 +11,17 @@ app.use(express.json());
 // When making a build
 // app.use(express.static(path.join(__dirname, '../public')));
 
-// All parts for initial load
-app.get('/search_parts/all', async (req, res) => {
-  try {
-    const results = await db.query(
-      `SELECT * FROM parts WHERE part_name != 'DNS' ORDER BY part_number limit 100`
-    );
-    res.json(results.rows);
-  } catch (err) {
-    console.log(err);
-  }
-});
+// All parts for initial load - NOT USING YET
+// app.get('/search_parts/all', async (req, res) => {
+//   try {
+//     const results = await db.query(
+//       `SELECT * FROM parts WHERE part_name != 'DNS' ORDER BY part_number limit 100`
+//     );
+//     res.json(results.rows);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
 // Search
 app.get('/search_parts', async (req, res) => {
@@ -83,13 +83,55 @@ app.get('/search_parts', async (req, res) => {
           OR part_description ILIKE $1
         ORDER BY part_number
         LIMIT 100;
-
     `,
       [`%${q}%`]
     );
     res.json(results.rows);
   } catch (err) {
     console.error('ERROR');
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
+// Single part search for Kanban
+app.get('/get_single_part', async (req, res) => {
+  try {
+    const { q } = req.query;
+    const results = await db.query(
+      `
+      SELECT
+        part_number, part_description
+      FROM parts
+      WHERE
+        part_number = $1
+      `,
+      [`${q}`]
+    );
+    res.json(results.rows[0]);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
+// Get kanban list
+app.get('/get_kanban_cards', async (req, res) => {
+  try {
+    const results = await db.query(`
+      SELECT
+        kanban_cards.id,
+        parts.part_number,
+        parts.part_description,
+        TO_CHAR(kanban_cards.date_added, 'YYYY-MM-DD') AS date_added
+      FROM kanban_cards
+      JOIN
+        parts ON kanban_cards.part_number = parts.part_number
+      ORDER BY
+        date_added DESC
+      `);
+    res.json(results.rows);
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ error: 'Server error...' });
   }
 });
