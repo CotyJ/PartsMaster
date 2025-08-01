@@ -8,8 +8,10 @@ export default function AccordionItem({ part }) {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const get_where_used = (value) => {
+    console.log(value);
+
     axios
-      .get(`${BASE_URL}/search_where_used?q=${value}`)
+      .get(`${BASE_URL}/where_used?part_number=${value}`)
       .then((response) => setWhereUsed(response.data))
       .catch((err) => console.log(err, ' Error getting part'));
   };

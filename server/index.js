@@ -128,12 +128,12 @@ app.get('/get_kanban_cards', async (req, res) => {
 
 
 // Get Where Used
-app.get('/search_where_used', async (req, res) => {
+app.get('/where_used', async (req, res) => {
   try {
-    const { q } = req.query;
+    const { part_number } = req.query;
     const results = await db.query(
       `SELECT bom_model FROM where_used WHERE part_number = $1 GROUP BY bom_model`,
-      [`${q}`]
+      [`${part_number}`]
     );
     res.json(results.rows);
   } catch (error) {
