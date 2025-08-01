@@ -124,6 +124,9 @@ app.get('/get_kanban_cards', async (req, res) => {
   }
 });
 
+// add kanban card
+
+
 // Get Where Used
 app.get('/search_where_used', async (req, res) => {
   try {
