@@ -2,6 +2,20 @@ DROP TABLE if exists kanban_cards;
 
 CREATE TABLE kanban_cards (
   id SERIAL PRIMARY KEY UNIQUE NOT NULL,
-  part_number UNIQUE NOT NULL,
-  date_added TIMESTAMP
+  part_number TEXT UNIQUE NOT NULL,
+  date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
 );
+
+-- Fake data to populate
+INSERT INTO kanban_cards (part_number)
+VALUES ('12201-4322' );
+
+INSERT INTO kanban_cards (part_number)
+VALUES ('43205-2304' );
+
+INSERT INTO kanban_cards (part_number)
+VALUES ('98100-5801' );
+
+INSERT INTO kanban_cards (part_number)
+VALUES ('64614-1825' );
