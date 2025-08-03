@@ -121,11 +121,11 @@ app.put('/kanban/:part_number', async (req, res) => {
     );
     res.json(results.rows);
   } catch (err) {
-      if (err.code === '23505') {
-        res.status(409).json({ error: 'Part number already exists' })}
-      else {
-        console.log(err);
-        res.status(500).json({ error: 'Server error...' });
+    if (err.code === '23505') {
+      res.status(409).json({ error: 'Part number already exists' });
+    } else {
+      console.log(err);
+      res.status(500).json({ error: 'Server error...' });
     }
   }
 });
@@ -140,7 +140,7 @@ app.get('/where_used', async (req, res) => {
     );
     res.json(results.rows);
   } catch (error) {
-    console.error('ERROR');
+    console.error(error);
     res.status(500).json({ error: 'Server error...' });
   }
 });
