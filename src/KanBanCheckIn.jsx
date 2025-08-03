@@ -32,7 +32,7 @@ export default function KanBanCheckIn() {
   // Initial page load
   useEffect(() => {
     get_kanban_cards();
-  }, []);
+  }, [kanbanList]);
 
   return (
     <>
