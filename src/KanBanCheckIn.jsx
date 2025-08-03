@@ -19,7 +19,7 @@ export default function KanBanCheckIn() {
     if (entry.length == 10) {
       axios
         .put(`${BASE_URL}/kanban/${entry}`)
-        .then(() => console.log("adding..."))
+        .then(() => console.log('adding...'))
         .catch((err) => console.error(err));
     }
   };
@@ -61,11 +61,11 @@ export default function KanBanCheckIn() {
               <th className="text-start col-2" scope="col">
                 Part Number
               </th>
-              <th className="text-start col-8" scope="col">
+              <th className="text-start col-9" scope="col">
                 Description
               </th>
-              <th className="text-start col-2" scope="col">
-                Date added
+              <th className="text-center col-auto" scope="col">
+                Date Added
               </th>
             </tr>
           </thead>
@@ -75,7 +75,7 @@ export default function KanBanCheckIn() {
               <tr key={item.id}>
                 <th scope="row">{item.part_number}</th>
                 <td>{item.part_description}</td>
-                <td>{item.date_added}</td>
+                <td className="text-center">{item.date_added}</td>
               </tr>
             ))}
           </tbody>
