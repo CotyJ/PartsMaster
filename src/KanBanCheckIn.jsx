@@ -5,7 +5,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export default function KanBanCheckIn() {
   const [kanbanList, setKanbanList] = useState([]);
   const [searchEntry, setSearchEntry] = useState('');
-  const [validEntry, setValidEntry] = useState(false);
+  const [isValidEntry, setisValidEntry] = useState(false);
 
   // get cards
   const get_kanban_cards = () => {
@@ -16,16 +16,11 @@ export default function KanBanCheckIn() {
   };
 
   const card_checkin = (entry) => {
-    console.log('Search entry: ', entry);
-
     if (entry.length == 10) {
-      setValidEntry(entry);
-      axios.put(`${BASE_URL}/kanban/part_number=${entry}`)
-      .then(/* do something*/)
-      .catch((err) => console.log(err)
-      );
-    } else {
-      setValidEntry(false);
+      axios
+        .put(`${BASE_URL}/kanban/${entry}`)
+        .then(() => console.log("adding..."))
+        .catch((err) => console.error(err));
     }
   };
 

@@ -104,11 +104,11 @@ app.get('/kanban', async (req, res) => {
 });
 
 // add kanban card
-app.put('/kanban', async (req, res) => {
-  console.log('Adding kb...');
-
+app.put('/kanban/:part_number', async (req, res) => {
   try {
-    const { part_number } = req.query;
+    const { part_number } = req.params;
+    console.log(part_number);
+
     const results = await db.query(
       `
       INSERT INTO
@@ -121,8 +121,12 @@ app.put('/kanban', async (req, res) => {
     );
     res.json(results.rows);
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: 'Server error...' });
+      if (err.code === '23505') {
+        res.status(409).json({ error: 'Part number already exists' })}
+      else {
+        console.log(err);
+        res.status(500).json({ error: 'Server error...' });
+    }
   }
 });
 
