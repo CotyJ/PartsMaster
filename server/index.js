@@ -133,9 +133,18 @@ app.put('/kanban/:part_number', async (req, res) => {
 // Delete kanban card (check in)
 app.delete('/kanban/:part_number', async (req, res) => {
   try {
-    const  { part_number }  = req.params;
-    console.log('params: ',  part_number);
-
+    const { part_number } = req.params;
+    const results = await db.query(
+      `
+      DELETE
+      FROM
+        kanban_cards
+      WHERE
+        id=($1)
+      `,
+      [`${part_number}`]
+    );
+    res.status(200).json(results.rows);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: 'Server error...' });
