@@ -16,10 +16,12 @@ export default function KanBanCheckIn() {
   };
 
   const card_checkin = (entry) => {
+    console.log(entry);
+
     if (entry.length == 10) {
       axios
         .put(`${BASE_URL}/kanban/${entry}`)
-        .then(() => console.log('adding...'))
+        .then(() => get_kanban_cards())
         .catch((err) => console.error(err));
     }
   };
@@ -28,13 +30,25 @@ export default function KanBanCheckIn() {
   const delete_card = (id) => {
     axios
       .delete(`${BASE_URL}/kanban/${id}`)
+      .then(get_kanban_cards())
       .catch((err) => console.log(err));
   };
+
+
+  // sort items by date added
+  const sort_by_date = () => {
+
+  }
+    // sort items by part number
+  const sort_by_part_num = () => {
+    const newList = [...kanbanList].sort((a,b) => a.part_number.localeCompare(b.part_number))
+    setKanbanList(newList);
+  }
 
   // Initial page load
   useEffect(() => {
     get_kanban_cards();
-  }, [kanbanList]);
+  }, []);
 
   return (
     <>
@@ -60,7 +74,7 @@ export default function KanBanCheckIn() {
         <table className="table table-dark table-striped table-hover text-start mw-100 overflow-y-auto">
           <thead>
             <tr>
-              <th className="text-start col-2" scope="col">
+              <th className="text-start col-2" scope="col" onClick={() => sort_by_part_num()}>
                 Part Number
               </th>
               <th className="text-start col-7" scope="col">
