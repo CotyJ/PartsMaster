@@ -96,7 +96,12 @@ export default function KanBanCheckIn() {
                 <td>{item.part_description}</td>
                 <td className="text-center">{item.date_added}</td>
                 <td className="text-center">
-                  <button className="btn btn-sm btn-primary" onClick={() => delete_card(item.id)}>✓</button>
+                  <button
+                    className="btn btn-sm btn-primary"
+                    onClick={() => delete_card(item.id)}
+                  >
+                    ✓
+                  </button>
                 </td>
               </tr>
             ))}
