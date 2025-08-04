@@ -130,6 +130,18 @@ app.put('/kanban/:part_number', async (req, res) => {
   }
 });
 
+// Delete kanban card (check in)
+app.delete('/kanban/:part_number', async (req, res) => {
+  try {
+    const  { part_number }  = req.params;
+    console.log('params: ',  part_number);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
 // Get Where Used
 app.get('/where_used', async (req, res) => {
   try {
