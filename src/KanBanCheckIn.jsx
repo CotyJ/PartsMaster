@@ -60,17 +60,17 @@ export default function KanBanCheckIn() {
         </fieldset>
       </form>
 
-      <div className="overflow-y-auto" style={{ maxHeight: '85vh' }}>
-        <table className="table table-dark table-striped table-hover text-start mw-100">
+      <div className="" style={{ maxHeight: '85vh' }}>
+        <table className="table table-dark table-striped table-hover text-start mw-100 overflow-y-auto">
           <thead>
             <tr>
               <th className="text-start col-2" scope="col">
                 Part Number
               </th>
-              <th className="text-start col-8" scope="col">
+              <th className="text-start col-7" scope="col">
                 Description
               </th>
-              <th className="text-center col-auto" scope="col">
+              <th className="text-center col-2" scope="col">
                 Date Added
               </th>
               <th className="text-center col-1" scope="col">
@@ -85,7 +85,9 @@ export default function KanBanCheckIn() {
                 <th scope="row">{item.part_number}</th>
                 <td>{item.part_description}</td>
                 <td className="text-center">{item.date_added}</td>
-                <td className="d-flex justify-content-center"><button className='btn btn-sm btn-primary'>✓</button></td>
+                <td className="text-center">
+                  <button className="btn btn-sm btn-primary" onClick={() => delete_card(item.id)}>✓</button>
+                </td>
               </tr>
             ))}
           </tbody>
