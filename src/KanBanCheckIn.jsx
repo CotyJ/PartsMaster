@@ -61,11 +61,14 @@ export default function KanBanCheckIn() {
               <th className="text-start col-2" scope="col">
                 Part Number
               </th>
-              <th className="text-start col-9" scope="col">
+              <th className="text-start col-8" scope="col">
                 Description
               </th>
               <th className="text-center col-auto" scope="col">
                 Date Added
+              </th>
+              <th className="text-center col-1" scope="col">
+                Check In
               </th>
             </tr>
           </thead>
@@ -76,6 +79,7 @@ export default function KanBanCheckIn() {
                 <th scope="row">{item.part_number}</th>
                 <td>{item.part_description}</td>
                 <td className="text-center">{item.date_added}</td>
+                <td className="d-flex justify-content-center"><button className='btn btn-sm btn-primary'>✓</button></td>
               </tr>
             ))}
           </tbody>
