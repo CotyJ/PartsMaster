@@ -107,8 +107,6 @@ app.get('/kanban', async (req, res) => {
 app.put('/kanban/:part_number', async (req, res) => {
   try {
     const { part_number } = req.params;
-    console.log(part_number);
-
     const results = await db.query(
       `
       INSERT INTO
@@ -131,18 +129,19 @@ app.put('/kanban/:part_number', async (req, res) => {
 });
 
 // Delete kanban card (check in)
-app.delete('/kanban/:part_number', async (req, res) => {
+app.delete('/kanban/:id', async (req, res) => {
   try {
-    const { part_number } = req.params;
+    const { id } = req.params;
     const results = await db.query(
       `
       DELETE
       FROM
         kanban_cards
       WHERE
-        id=($1)
+        id=$1
+      RETURNING *
       `,
-      [`${part_number}`]
+      [id]
     );
     res.status(200).json(results.rows);
   } catch (err) {

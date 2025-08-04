@@ -25,14 +25,10 @@ export default function KanBanCheckIn() {
   };
 
   // delete part from table
-  const delete_card = (entry) => {
-    console.log(`deleting card ${entry} from kanban`);
-
+  const delete_card = (id) => {
     axios
-      .delete(`${BASE_URL}/kanban/${entry}`)
-      .then()
-      .catch((err) => console.log(err))
-
+      .delete(`${BASE_URL}/kanban/${id}`)
+      .catch((err) => console.log(err));
   };
 
   // Initial page load
