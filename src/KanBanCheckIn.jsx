@@ -5,7 +5,8 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export default function KanBanCheckIn() {
   const [kanbanList, setKanbanList] = useState([]);
   const [searchEntry, setSearchEntry] = useState('');
-  const [isValidEntry, setisValidEntry] = useState(false);
+  const [dateSortedAsc, setDateSortedAsc] = useState(true);
+  const [numberSortedAsc, setNumberSortedAsc] = useState(null);
 
   // get cards
   const get_kanban_cards = () => {
@@ -16,8 +17,6 @@ export default function KanBanCheckIn() {
   };
 
   const card_checkin = (entry) => {
-    console.log(entry);
-
     if (entry.length == 10) {
       axios
         .put(`${BASE_URL}/kanban/${entry}`)
@@ -34,16 +33,44 @@ export default function KanBanCheckIn() {
       .catch((err) => console.log(err));
   };
 
-
   // sort items by date added
   const sort_by_date = () => {
+    setDateSortedAsc(!dateSortedAsc);
+    setNumberSortedAsc(null);
+    if (dateSortedAsc) {
+      let newList = [...kanbanList].sort((a, b) =>
+        a.date_added.localeCompare(b.date_added)
+      );
+      setKanbanList(newList);
+    } else {
+      let newList = [...kanbanList].sort((a, b) =>
+        b.date_added.localeCompare(a.date_added)
+      );
+      setKanbanList(newList);
+    }
+  };
 
-  }
-    // sort items by part number
+  // sort items by part number
   const sort_by_part_num = () => {
-    const newList = [...kanbanList].sort((a,b) => a.part_number.localeCompare(b.part_number))
-    setKanbanList(newList);
-  }
+    if (numberSortedAsc === null) {
+      setNumberSortedAsc(true);
+    } else {
+      setNumberSortedAsc(!numberSortedAsc);
+    }
+    setDateSortedAsc(null);
+    console.log(dateSortedAsc);
+    if (numberSortedAsc) {
+      let newList = [...kanbanList].sort((a, b) =>
+        a.part_number.localeCompare(b.part_number)
+      );
+      setKanbanList(newList);
+    } else {
+      let newList = [...kanbanList].sort((a, b) =>
+        b.part_number.localeCompare(a.part_number)
+      );
+      setKanbanList(newList);
+    }
+  };
 
   // Initial page load
   useEffect(() => {
@@ -74,14 +101,30 @@ export default function KanBanCheckIn() {
         <table className="table table-dark table-striped table-hover text-start mw-100 overflow-y-auto">
           <thead>
             <tr>
-              <th className="text-start col-2" scope="col" onClick={() => sort_by_part_num()}>
-                Part Number
+              <th
+                className="text-start col-2"
+                scope="col"
+                onClick={() => sort_by_part_num()}
+              >
+                {numberSortedAsc === true
+                  ? 'Part Number ↑'
+                  : numberSortedAsc === false
+                  ? 'Part Number ↓'
+                  : 'Part Number'}
               </th>
               <th className="text-start col-7" scope="col">
                 Description
               </th>
-              <th className="text-center col-2" scope="col">
-                Date Added
+              <th
+                className="text-center col-2"
+                scope="col"
+                onClick={() => sort_by_date()}
+              >
+                {dateSortedAsc === true
+                  ? 'Date Added ↑'
+                  : dateSortedAsc === false
+                  ? 'Date Added ↓'
+                  : 'Date Added'}
               </th>
               <th className="text-center col-1" scope="col">
                 Check In
