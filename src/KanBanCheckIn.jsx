@@ -97,7 +97,7 @@ export default function KanBanCheckIn() {
         </fieldset>
       </form>
 
-      <div className="" style={{ maxHeight: '85vh' }}>
+      <div style={{ maxHeight: '85vh' }}>
         <table className="table table-dark table-striped table-hover text-start mw-100 overflow-y-auto">
           <thead>
             <tr>
@@ -116,7 +116,8 @@ export default function KanBanCheckIn() {
                 Description
               </th>
               <th
-                className="text-center col-2"
+                className="text-center col-auto"
+                style={{ whiteSpace: 'nowrap', width: '1%' }}
                 scope="col"
                 onClick={() => sort_by_date()}
               >
@@ -124,9 +125,10 @@ export default function KanBanCheckIn() {
                   ? 'Date Added ↑'
                   : dateSortedAsc === false
                   ? 'Date Added ↓'
-                  : 'Date Added'}
+                  :  <div>Date Added <span style={{ visibility: 'hidden' }}>↑</span></div>
+                  }
               </th>
-              <th className="text-center col-1" scope="col">
+              <th className="text-center col-1 text-nowrap" scope="col">
                 Check In
               </th>
             </tr>
@@ -137,7 +139,7 @@ export default function KanBanCheckIn() {
               <tr key={item.id}>
                 <th scope="row">{item.part_number}</th>
                 <td>{item.part_description}</td>
-                <td className="text-center">{item.date_added}</td>
+                <td className="text-start">{item.date_added}</td>
                 <td className="text-center">
                   <button
                     className="btn btn-sm btn-primary"

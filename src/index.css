@@ -27,11 +27,14 @@ a {
 }
 
 table {
+}
+
+thead {
   border: 2px solid;
-  border-radius: 8px;
 }
 
 thead th {
+  border-top: 2px solid #212529;
   position: sticky;
   top: 0;
   background-color: #212529;
