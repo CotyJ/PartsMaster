@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function KanBanCheckIn() {
@@ -121,12 +121,15 @@ export default function KanBanCheckIn() {
                 scope="col"
                 onClick={() => sort_by_date()}
               >
-                {dateSortedAsc === true
-                  ? 'Date Added ↑'
-                  : dateSortedAsc === false
-                  ? 'Date Added ↓'
-                  :  <div>Date Added <span style={{ visibility: 'hidden' }}>↑</span></div>
-                  }
+                {dateSortedAsc === true ? (
+                  'Date Added ↑'
+                ) : dateSortedAsc === false ? (
+                  'Date Added ↓'
+                ) : (
+                  <div>
+                    Date Added <span style={{ visibility: 'hidden' }}>↑</span>
+                  </div>
+                )}
               </th>
               <th className="text-center col-1 text-nowrap" scope="col">
                 Check In

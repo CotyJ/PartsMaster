@@ -8,8 +8,6 @@ export default function AccordionItem({ part }) {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const get_where_used = (value) => {
-    console.log(value);
-
     axios
       .get(`${BASE_URL}/where_used?part_number=${value}`)
       .then((response) => setWhereUsed(response.data))
@@ -30,15 +28,22 @@ export default function AccordionItem({ part }) {
         <td colSpan={'2'} className="accordion-body">
           <div
             className="row py-2"
-            style={{ backgroundColor: 'rgb(69, 69, 69)', margin: '0.2rem', borderRadius: '8px' }}
+            style={{
+              backgroundColor: 'rgb(69, 69, 69)',
+              margin: '0.2rem',
+              borderRadius: '8px',
+            }}
           >
             <div className="col-2">
-              <h3 className='text-center'>Used in...</h3>
-              <ul className='p-0'>
+              <h3 className="text-center">Used in...</h3>
+              <ul className="p-0">
                 {whereUsed
                   .filter((item) => item.bom_model !== null)
                   .map((item) => (
-                    <li key={item.bom_model} className='text-center'>{`${item.bom_model}`}</li>
+                    <li
+                      key={item.bom_model}
+                      className="text-center"
+                    >{`${item.bom_model}`}</li>
                   ))}
               </ul>
             </div>
