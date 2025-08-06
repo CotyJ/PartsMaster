@@ -86,6 +86,7 @@ export default function KanBanCheckIn() {
         }}
       >
         <fieldset>
+          <legend style={{ fontWeight: 'bold' }}>Enter a part number</legend>
           <input
             type="search"
             id="search-bar"
@@ -102,7 +103,7 @@ export default function KanBanCheckIn() {
           <thead>
             <tr>
               <th
-                className="text-start col-2"
+                className="text-start column-name part-num-col col-auto"
                 scope="col"
                 onClick={() => sort_by_part_num()}
               >
@@ -112,8 +113,8 @@ export default function KanBanCheckIn() {
                   ? 'Part Number ↓'
                   : 'Part Number'}
               </th>
-              <th className="text-start col-7" scope="col">
-                Description
+              <th className="text-start col-auto part-desc-col" scope="col">
+                <div className="column-name">Description</div>
               </th>
               <th
                 className="text-center col-auto"
