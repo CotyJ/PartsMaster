@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom"
+import { Outlet, NavLink, useLocation } from "react-router-dom"
 
 export default function Layout() {
   return (
@@ -8,14 +8,13 @@ export default function Layout() {
             <div className="col-auto">
               <nav className="row navbar d-flex justify-content-between mt-0 pt-0" id="nav-bar">
                 <ul className="navbar-nav">
-                  <li className="nav-item navbar-text "><Link className="nav-link px-4" to="/">Home</Link></li>
-                  <li className="nav-item navbar-text "><Link className="nav-link px-4" to="/parts-table">Parts Lookup</Link></li>
-                  <li className="nav-item navbar-text "><Link className="nav-link px-4" to="/orders">Orders</Link></li>
-                  <li className="nav-item navbar-text "><Link className="nav-link px-4" to="/kb-checkin">Kanban</Link></li>
-                  <li className="nav-item navbar-text "><Link className="nav-link px-4" to="/parts-receiving">Parts Receiving</Link></li>
-                  <li className="nav-item navbar-text "><Link className="nav-link px-4" to="/parts-receiving">ECO's</Link></li>
-                  <li className="nav-item navbar-text "><Link className="nav-link px-4" to="/parts-receiving">Purchase Orders</Link></li>
-                  <li className="nav-item navbar-text "><Link className="nav-link px-4" to="/parts-receiving">Inventory</Link></li>
+                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/">Home</NavLink></li>
+                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/parts-table">Parts Lookup</NavLink></li>
+                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/orders">Orders</NavLink></li>
+                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/kb-checkin">To Order</NavLink></li>
+                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/parts-receiving">Parts Receiving</NavLink></li>
+                  {/* <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/purchase-orders">Purchase Orders</NavLink></li> */}
+                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/inventory">Inventory</NavLink></li>
                 </ul>
               </nav>
             </div>
