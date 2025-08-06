@@ -1,6 +1,7 @@
-html, body {
-    height:100%;
-    width: 100%;
+html,
+body {
+  height: 100%;
+  width: 100%;
 }
 
 :root {
@@ -16,19 +17,17 @@ li {
 }
 
 a {
-  color: white  !important;
+  color: white !important;
   text-decoration: none !important;
   font-size: x-large;
 }
 
 .nav-item:hover {
-  background-image:
-    linear-gradient(to right,  #4389d5, rgb(32, 38, 106));
+  background-image: linear-gradient(to right, #4389d5, rgb(32, 38, 106));
 }
 
-table {
+thead {
   border: 2px solid;
-  border-radius: 8px;
 }
 
 thead th {
@@ -39,17 +38,14 @@ thead th {
   text-align: start;
 }
 
-
-
-
-table:hover{
+table:hover {
   overflow-y: scroll !important;
 }
 
 .table {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .table::-webkit-scrollbar {
-    display: none;
+  display: none;
 }

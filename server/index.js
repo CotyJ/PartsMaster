@@ -11,22 +11,10 @@ app.use(express.json());
 // When making a build
 // app.use(express.static(path.join(__dirname, '../public')));
 
-// All parts for initial load
-app.get('/search_parts/all', async (req, res) => {
-  try {
-    const results = await db.query(
-      `SELECT * FROM parts WHERE part_name != 'DNS' ORDER BY part_number limit 100`
-    );
-    res.json(results.rows);
-  } catch (err) {
-    console.log(err);
-  }
-});
-
 // Search
-app.get('/search_parts', async (req, res) => {
+app.get('/parts', async (req, res) => {
   try {
-    const { q } = req.query;
+    const { part_number } = req.query;
     const results = await db.query(
       `
         SELECT
@@ -83,9 +71,8 @@ app.get('/search_parts', async (req, res) => {
           OR part_description ILIKE $1
         ORDER BY part_number
         LIMIT 100;
-
     `,
-      [`%${q}%`]
+      [`%${part_number}%`]
     );
     res.json(results.rows);
   } catch (err) {
@@ -94,17 +81,86 @@ app.get('/search_parts', async (req, res) => {
   }
 });
 
-// Get Where Used
-app.get('/search_where_used', async (req, res) => {
+// Get kanban list
+app.get('/kanban', async (req, res) => {
   try {
-    const { q } = req.query;
+    const results = await db.query(`
+      SELECT
+        kanban_cards.id,
+        parts.part_number,
+        parts.part_description,
+        TO_CHAR(kanban_cards.date_added, 'YYYY-MM-DD') AS date_added
+      FROM kanban_cards
+      JOIN
+        parts ON kanban_cards.part_number = parts.part_number
+      ORDER BY
+        date_added DESC
+      `);
+    res.json(results.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
+// add kanban card
+app.put('/kanban/:part_number', async (req, res) => {
+  try {
+    const { part_number } = req.params;
+    const results = await db.query(
+      `
+      INSERT INTO
+        kanban_cards
+        (part_number)
+      VALUES
+        ($1)
+      `,
+      [`${part_number}`]
+    );
+    res.json(results.rows);
+  } catch (err) {
+    if (err.code === '23505') {
+      res.status(409).json({ error: 'Part number already exists' });
+    } else {
+      console.log(err);
+      res.status(500).json({ error: 'Server error...' });
+    }
+  }
+});
+
+// Delete kanban card (check in)
+app.delete('/kanban/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const results = await db.query(
+      `
+      DELETE
+      FROM
+        kanban_cards
+      WHERE
+        id=$1
+      RETURNING *
+      `,
+      [id]
+    );
+    res.status(200).json(results.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
+// Get Where Used
+app.get('/where_used', async (req, res) => {
+  try {
+    const { part_number } = req.query;
     const results = await db.query(
       `SELECT bom_model FROM where_used WHERE part_number = $1 GROUP BY bom_model`,
-      [`${q}`]
+      [`${part_number}`]
     );
     res.json(results.rows);
   } catch (error) {
-    console.error('ERROR');
+    console.error(error);
     res.status(500).json({ error: 'Server error...' });
   }
 });
