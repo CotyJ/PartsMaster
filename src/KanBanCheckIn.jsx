@@ -86,6 +86,7 @@ export default function KanBanCheckIn() {
         }}
       >
         <fieldset>
+          <legend style={{ fontWeight: 'bold' }}>Enter a part number</legend>
           <input
             type="search"
             id="search-bar"
@@ -98,25 +99,29 @@ export default function KanBanCheckIn() {
       </form>
 
       <div style={{ maxHeight: '85vh' }}>
-        <table className="table table-dark table-striped table-hover text-start mw-100 overflow-y-auto">
+        <table className="table table-dark table-hover text-start mw-100 overflow-y-auto">
           <thead>
             <tr>
               <th
-                className="text-start col-2"
+                className="text-center column-name part-num-col col-auto"
                 scope="col"
                 onClick={() => sort_by_part_num()}
               >
-                {numberSortedAsc === true
-                  ? 'Part Number ↑'
-                  : numberSortedAsc === false
-                  ? 'Part Number ↓'
-                  : 'Part Number'}
+                {numberSortedAsc === true ? (
+                  'Part Number ↑'
+                ) : numberSortedAsc === false ? (
+                  'Part Number ↓'
+                ) : (
+                  <div>
+                    Part Number <span style={{ visibility: 'hidden' }}>↑</span>
+                  </div>
+                )}
               </th>
-              <th className="text-start col-7" scope="col">
-                Description
+              <th className="text-start col-auto part-desc-col" scope="col">
+                <div className="column-name">Description</div>
               </th>
               <th
-                className="text-center col-auto"
+                className="text-center col-auto column-name"
                 style={{ whiteSpace: 'nowrap', width: '1%' }}
                 scope="col"
                 onClick={() => sort_by_date()}
@@ -131,7 +136,10 @@ export default function KanBanCheckIn() {
                   </div>
                 )}
               </th>
-              <th className="text-center col-1 text-nowrap" scope="col">
+              <th
+                className="text-center col-1 text-nowrap column-name"
+                scope="col"
+              >
                 Check In
               </th>
             </tr>
@@ -140,9 +148,11 @@ export default function KanBanCheckIn() {
           <tbody>
             {kanbanList.map((item) => (
               <tr key={item.id}>
-                <th scope="row">{item.part_number}</th>
+                <th scope="row" className="text-center align-middle">
+                  {item.part_number}
+                </th>
                 <td>{item.part_description}</td>
-                <td className="text-start">{item.date_added}</td>
+                <td className="text-center">{item.date_added}</td>
                 <td className="text-center">
                   <button
                     className="btn btn-sm btn-primary"

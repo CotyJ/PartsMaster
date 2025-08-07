@@ -25,6 +25,9 @@ export default function PartsTable() {
   return (
     <div>
       <fieldset>
+        <legend style={{ fontWeight: 'bold' }}>
+          Filter by number or description
+        </legend>
         <input
           type="search"
           id="search-bar"
@@ -35,23 +38,35 @@ export default function PartsTable() {
       </fieldset>
 
       <div className="overflow-y-auto" style={{ maxHeight: '85vh' }}>
-        <table className="table table-dark table-striped table-hover text-start mw-100">
-          <thead>
-            <tr>
-              <th className="text-start col-2" scope="col">
-                Part Number
-              </th>
-              <th className="text-start col-10" scope="col">
-                Description
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {partData.map((part) => (
-              <AccordionItem key={part.part_number} part={part} />
-            ))}
-          </tbody>
-        </table>
+        {partData.length > 0 ? (
+          <table className="table table-dark table-hover text-start mw-100">
+            <thead>
+              <tr>
+                <th className="text-center column-name part-num-col" scope="col">
+                  <div className="column-name">Part Number</div>
+                </th>
+                <th className="text-start column-name col-auto" scope="col">
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {partData.map((part) => (
+                <AccordionItem key={part.part_number} part={part} />
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <table className='table table-dark table-striped table-hover text-start mw-100'>
+            <thead>
+              <tr>
+                <th className="text-start column-name part-num-col" scope="col">
+                  Start typing for some results!
+                </th>
+              </tr>
+            </thead>
+          </table>
+        )}
       </div>
     </div>
   );

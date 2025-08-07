@@ -6,6 +6,8 @@ import Home from './Home';
 import Orders from './Orders';
 import KanBanCheckIn from './KanBanCheckIn';
 import PartsReceiving from './PartsReceiving';
+import Inventory from './Inventory';
+import PurchaseOrders from './PurchaseOrders';
 
 import './App.css';
 
@@ -21,6 +23,8 @@ function App() {
           <Route path="orders" element={<Orders />}/>
           <Route path="kb-checkin" element={<KanBanCheckIn />}/>
           <Route path="parts-receiving" element={<PartsReceiving />}/>
+          <Route path="purchase-orders" element={<PurchaseOrders />}/>
+          <Route path="inventory" element={<Inventory />}/>
         </Route>
       </Routes>
     </BrowserRouter>
