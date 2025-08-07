@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export default function AccordionItem({ part }) {
   const [whereUsed, setWhereUsed] = useState([]);
+  const [expandedPartId, setExpandedPartId] = useState(null);
 
   const filteredKeys = ['id', 'part_number', 'part_description'];
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -14,22 +15,30 @@ export default function AccordionItem({ part }) {
       .catch((err) => console.log(err, ' Error getting part'));
   };
 
+  const expand_item = (id) => {
+    setExpandedPartId((prevId) => (prevId === id ? null : id));
+  };
+
   return (
     <>
       <tr
+        key={part.id}
         data-bs-toggle="collapse"
         data-bs-target={`#${part.id}`}
-        onClick={() => get_where_used(part.part_number)}
+
+        onClick={() => {
+          get_where_used(part.part_number);
+          expand_item(part.id);
+        }}
       >
-        <td>{part.part_number}</td>
-        <td className="">{part.part_description}</td>
+        <td className={expandedPartId === part.id ? 'expanded' : ''}>{part.part_number}</td>
+        <td>{part.part_description}</td>
       </tr>
       <tr id={`${part.id}`} className="collapse">
         <td colSpan={'2'} className="accordion-body">
           <div
             className="row py-2"
             style={{
-              backgroundColor: 'rgb(69, 69, 69)',
               margin: '0.2rem',
               borderRadius: '8px',
             }}
