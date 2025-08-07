@@ -30,7 +30,13 @@ export default function AccordionItem({ part }) {
           expand_item(part.id);
         }}
       >
-        <td className={"text-center align-middle".concat(expandedPartId === part.id ? 'expanded' : '')}>{part.part_number}</td>
+        <td
+          className={'text-center align-middle '.concat(
+            expandedPartId === part.id ? 'expanded' : ''
+          )}
+        >
+          {part.part_number}
+        </td>
         <td>{part.part_description}</td>
       </tr>
       <tr id={`${part.id}`} className="collapse">
