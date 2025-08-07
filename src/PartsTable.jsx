@@ -39,7 +39,7 @@ export default function PartsTable() {
 
       <div className="overflow-y-auto" style={{ maxHeight: '85vh' }}>
         {partData.length > 0 ? (
-          <table className="table table-dark table-striped table-hover text-start mw-100">
+          <table className="table table-dark table-hover text-start mw-100">
             <thead>
               <tr>
                 <th className="text-center column-name part-num-col" scope="col">

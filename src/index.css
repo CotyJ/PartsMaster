@@ -91,3 +91,7 @@ td.expanded {
 .bd-callout-primary {
   border-left-color: #0051cc;
 }
+
+.accordion-body {
+  background-color: rgb(61, 61, 61) !important;
+}

@@ -99,7 +99,7 @@ export default function KanBanCheckIn() {
       </form>
 
       <div style={{ maxHeight: '85vh' }}>
-        <table className="table table-dark table-striped table-hover text-start mw-100 overflow-y-auto">
+        <table className="table table-dark table-hover text-start mw-100 overflow-y-auto">
           <thead>
             <tr>
               <th
@@ -132,7 +132,10 @@ export default function KanBanCheckIn() {
                   </div>
                 )}
               </th>
-              <th className="text-center col-1 text-nowrap column-name" scope="col">
+              <th
+                className="text-center col-1 text-nowrap column-name"
+                scope="col"
+              >
                 Check In
               </th>
             </tr>
@@ -141,7 +144,9 @@ export default function KanBanCheckIn() {
           <tbody>
             {kanbanList.map((item) => (
               <tr key={item.id}>
-                <th scope="row" className='text-center align-middle'>{item.part_number}</th>
+                <th scope="row" className="text-center align-middle">
+                  {item.part_number}
+                </th>
                 <td>{item.part_description}</td>
                 <td className="text-center">{item.date_added}</td>
                 <td className="text-center">
