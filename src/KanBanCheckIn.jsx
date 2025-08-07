@@ -103,7 +103,7 @@ export default function KanBanCheckIn() {
           <thead>
             <tr>
               <th
-                className="text-start column-name part-num-col col-auto"
+                className="text-center column-name part-num-col col-auto"
                 scope="col"
                 onClick={() => sort_by_part_num()}
               >
@@ -117,7 +117,7 @@ export default function KanBanCheckIn() {
                 <div className="column-name">Description</div>
               </th>
               <th
-                className="text-center col-auto"
+                className="text-center col-auto column-name"
                 style={{ whiteSpace: 'nowrap', width: '1%' }}
                 scope="col"
                 onClick={() => sort_by_date()}
@@ -132,7 +132,7 @@ export default function KanBanCheckIn() {
                   </div>
                 )}
               </th>
-              <th className="text-center col-1 text-nowrap" scope="col">
+              <th className="text-center col-1 text-nowrap column-name" scope="col">
                 Check In
               </th>
             </tr>
@@ -143,7 +143,7 @@ export default function KanBanCheckIn() {
               <tr key={item.id}>
                 <th scope="row">{item.part_number}</th>
                 <td>{item.part_description}</td>
-                <td className="text-start">{item.date_added}</td>
+                <td className="text-center">{item.date_added}</td>
                 <td className="text-center">
                   <button
                     className="btn btn-sm btn-primary"

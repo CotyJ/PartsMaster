@@ -6,11 +6,11 @@ body {
 }
 
 :root {
-  background-color: rgb(32, 38, 106) !important;
+  background-color: rgb(37, 45, 139) !important;
 }
 
 body {
-  background-color: rgb(32, 38, 106) !important;
+  background-color: rgb(37, 45, 139) !important;
 }
 
 li {
@@ -20,7 +20,7 @@ li {
 a {
   color: white !important;
   text-decoration: none !important;
-  font-size: x-large;
+  font-size: x-large !important;
 }
 
 .nav-link {
@@ -28,7 +28,7 @@ a {
 }
 .nav-link:hover,
 .nav-link.active {
-  background-image: linear-gradient(to right, #4389d5, rgb(32, 38, 106));
+  background-image: linear-gradient(to right, #4389d5, rgb(37, 45, 139));
   transition: background-image 0.3s ease-in-out;
 }
 
@@ -57,6 +57,13 @@ table:hover {
   display: none;
 }
 
+td.expanded {
+  background-color: #0dcaf0;
+  /* border-left: 4px solid #0d6efd; */
+  font-weight: bold;
+  font-size: large;
+}
+
 .part-num-col {
   width: 10rem !important;
   max-width: 10rem !important;
@@ -67,7 +74,24 @@ table:hover {
   font-size: 1.2rem;
 }
 
-/* .column-name {
-  padding: 0;
-  margin: 0;
-} */
+.column-name {
+  font-size: 1.2rem;
+}
+
+/* Callouts test */
+
+.bd-callout {
+  font-weight: bold;
+  font-size: larger;
+  padding: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid #91adcb;
+  border-left-width: 0.4rem;
+  border-radius: 0.5rem;
+  background-color: #4389d5;
+}
+
+.bd-callout-primary {
+  border-left-color: #0051cc;
+}
