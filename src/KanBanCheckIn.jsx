@@ -107,11 +107,15 @@ export default function KanBanCheckIn() {
                 scope="col"
                 onClick={() => sort_by_part_num()}
               >
-                {numberSortedAsc === true
-                  ? 'Part Number ↑'
-                  : numberSortedAsc === false
-                  ? 'Part Number ↓'
-                  : 'Part Number'}
+                {numberSortedAsc === true ? (
+                  'Part Number ↑'
+                ) : numberSortedAsc === false ? (
+                  'Part Number ↓'
+                ) : (
+                  <div>
+                    Part Number <span style={{ visibility: 'hidden' }}>↑</span>
+                  </div>
+                )}
               </th>
               <th className="text-start col-auto part-desc-col" scope="col">
                 <div className="column-name">Description</div>
