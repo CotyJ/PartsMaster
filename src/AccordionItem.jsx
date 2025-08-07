@@ -25,13 +25,12 @@ export default function AccordionItem({ part }) {
         key={part.id}
         data-bs-toggle="collapse"
         data-bs-target={`#${part.id}`}
-
         onClick={() => {
           get_where_used(part.part_number);
           expand_item(part.id);
         }}
       >
-        <td className={expandedPartId === part.id ? 'expanded' : ''}>{part.part_number}</td>
+        <td className={"text-center align-middle".concat(expandedPartId === part.id ? 'expanded' : '')}>{part.part_number}</td>
         <td>{part.part_description}</td>
       </tr>
       <tr id={`${part.id}`} className="collapse">

@@ -141,7 +141,7 @@ export default function KanBanCheckIn() {
           <tbody>
             {kanbanList.map((item) => (
               <tr key={item.id}>
-                <th scope="row">{item.part_number}</th>
+                <th scope="row" className='text-center align-middle'>{item.part_number}</th>
                 <td>{item.part_description}</td>
                 <td className="text-center">{item.date_added}</td>
                 <td className="text-center">
