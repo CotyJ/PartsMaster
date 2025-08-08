@@ -31,7 +31,7 @@ export default function Inventory() {
               className="form-control"
               style={{ maxWidth: '200px' }}
               placeholder="ex: 43205-2304"
-              onChange={''}
+              // onChange={''}
             ></input>
 
             <label className="fw-bold fs-5 ps-4 pe-2 mb-0">Location:</label>
