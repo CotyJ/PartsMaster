@@ -210,6 +210,28 @@ app.put('/inventory/:part_number/:os_location', async (req, res) => {
   }
 });
 
+// Delete from inventory
+app.delete('/inventory/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const results = await db.query(
+        `
+        DELETE
+        FROM
+          overstock_locations
+        WHERE
+          id=$1
+        RETURNING *
+          `,
+        [id]
+      );
+      res.status(200).json(results.rows);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: 'Server error...' });
+    }
+  });
+
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
