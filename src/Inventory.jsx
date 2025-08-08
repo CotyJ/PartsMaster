@@ -25,6 +25,15 @@ export default function Inventory() {
       .catch((err) => console.log(err));
   };
 
+  const add_to_inventory = (entry) => {
+    if (entry.length == 10) {
+      axios
+        .put(`${BASE_URL}/inventory/${entry}`)
+        .then(() => get_inventory())
+        .catch((err) => console.error(err));
+    }
+  };
+
   useEffect(() => {
     get_inventory();
   }, []);
