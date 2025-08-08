@@ -70,7 +70,7 @@ export default function Inventory() {
             Enter a part and a location
           </legend>
           <div className="d-flex align-items-center gap-3 flex-wrap">
-            <label className="fw-bold fs-5 pe-2">Part number:</label>
+            <label className="fw-bold fs-5 pe-2">Add Part number:</label>
             <input
               type="search"
               id="search-bar"
