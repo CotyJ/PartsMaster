@@ -25,7 +25,7 @@ export default function PartsTable() {
   return (
     <div>
       <fieldset>
-        <legend style={{ fontWeight: 'bold' }}>
+        <legend className='fw-bold page-legend'>
           Filter by number or description
         </legend>
         <input
