@@ -3,18 +3,21 @@ import { useEffect, useState } from 'react';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function Inventory() {
-  const [inventoryList, setInventoryList] = useState(true);
+  const [inventoryList, setInventoryList] = useState([]);
 
-  const getInventory = () => {
+  const get_inventory = () => {
     axios
       .get(`${BASE_URL}/inventory`)
-      .then((response) => setInventoryList(response.data))
+      .then((results) => {
+        console.log(results.data);
+        setInventoryList(results.data);
+      })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    getInventory();
-  }, [inventoryList]);
+    get_inventory();
+  }, []);
 
   return (
     <div>
@@ -60,8 +63,28 @@ export default function Inventory() {
                 <th className="text-start column-name col-auto" scope="col">
                   Description
                 </th>
+                <th className="text-center column-name col-auto" scope="col">
+                  Location
+                </th>
+                <th className="text-center column-name col-1" scope="col">
+                  Delete
+                </th>
               </tr>
             </thead>
+            <tbody>
+              {inventoryList.map((item) => (
+                <tr key={item.id}>
+                  <th scope="row" className="text-center align-middle">
+                    {item.part_number}
+                  </th>
+                  <td>{item.part_description}</td>
+                  <td className="text-center">{item.os_location}</td>
+                  <td className="text-center">
+                    <button className="btn btn-sm btn-primary">✓</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         ) : (
           <table className="table table-dark table-striped table-hover text-start mw-100">
