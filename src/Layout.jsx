@@ -11,7 +11,7 @@ export default function Layout() {
                   <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/">Home</NavLink></li>
                   <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/parts-table">Parts Lookup</NavLink></li>
                   {/* <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/orders">Orders</NavLink></li> */}
-                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/kb-checkin">To Order</NavLink></li>
+                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/kb-checkin">To Replenish</NavLink></li>
                   {/* <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/parts-receiving">Parts Receiving</NavLink></li> */}
                   <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/inventory">Inventory</NavLink></li>
                 </ul>
