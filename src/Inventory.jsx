@@ -44,6 +44,15 @@ export default function Inventory() {
     }
   };
 
+  const delete_from_inventory = (id) => {
+    console.log(`Delete id ${id}`);
+
+    axios
+      .delete(`${BASE_URL}/inventory/${id}`)
+      .then(() => get_inventory())
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     get_inventory();
   }, []);
@@ -135,7 +144,7 @@ export default function Inventory() {
                   <td>{item.part_description}</td>
                   <td className="text-center">{item.os_location}</td>
                   <td className="text-center">
-                    <button className="btn btn-sm btn-primary">✓</button>
+                    <button className="btn btn-sm btn-primary" onClick={() => delete_from_inventory(item.id)}>✓</button>
                   </td>
                 </tr>
               ))}
