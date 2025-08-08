@@ -25,13 +25,14 @@ export default function PartsTable() {
   return (
     <div>
       <fieldset>
-        <legend className='fw-bold page-legend'>
+        <legend className="fw-bold page-legend mb-4">
           Filter by number or description
         </legend>
+        <label className="fw-bold fs-5 pe-2">Part number:</label>
         <input
           type="search"
           id="search-bar"
-          className="m-3 p-2 mx-0 rounded"
+          className="p-2 mx-0 rounded"
           onChange={(e) => setSearchEntry(e.target.value)}
           placeholder="ex: 43205-2304"
         ></input>

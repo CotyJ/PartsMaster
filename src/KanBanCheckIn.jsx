@@ -86,7 +86,8 @@ export default function KanBanCheckIn() {
         }}
       >
         <fieldset>
-          <legend className='fw-bold page-legend'>Enter a part number</legend>
+          <legend className="fw-bold page-legend">Enter a part number</legend>
+          <label className="fw-bold fs-5 pe-2">Part number:</label>
           <input
             type="search"
             id="search-bar"
