@@ -20,21 +20,28 @@ export default function Inventory() {
     <div>
       <form>
         <fieldset>
-          <legend style={{ fontWeight: 'bold' }}>Add a part and a location</legend>
+          <legend className='fw-bold page-legend'>Enter a part and a location</legend>
+          <div className="d-flex align-items-center gap-3 flex-wrap">
 
-          <label style={{ fontWeight: 'bold' }}>Part number:</label>
-          <input
-            type="search"
-            id="search-bar"
-            className="m-3 p-2 mx-0 rounded"
-            onChange={''}
-            placeholder="ex: 43205-2304"
-          ></input>
-          <select className="m-3 p-2  rounded">
-            <option>first</option>
-            <option>second</option>
-            <option>third</option>
-          </select>
+            <label  className="fw-bold fs-5 pe-2 mb-0">Part number:</label>
+            <input
+              type="search"
+              id="search-bar"
+              className="form-control"
+              style={{ maxWidth: "200px" }}
+              placeholder="ex: 43205-2304"
+              onChange={''}>
+            </input>
+
+            <label className="fw-bold fs-5 ps-4 pe-2 mb-0">Location:</label>
+            <select className="form-select" style={{ maxWidth: "200px" }}>
+              <option>first</option>
+              <option>second</option>
+              <option>third</option>
+            </select>
+
+            <button className='btn btn-primary ms-2 p-2'>Add location</button>
+          </div>
         </fieldset>
       </form>
     </div>
