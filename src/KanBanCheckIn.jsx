@@ -80,22 +80,29 @@ export default function KanBanCheckIn() {
   return (
     <>
       <form
+        className="mb-2"
         onSubmit={(e) => {
           e.preventDefault();
           card_checkin(searchEntry);
         }}
       >
         <fieldset>
-          <legend className="fw-bold page-legend">Enter a part number</legend>
-          <label className="fw-bold fs-5 pe-2">Part number:</label>
-          <input
-            type="search"
-            id="search-bar"
-            className="m-3 p-2 mx-0 rounded"
-            onChange={(e) => setSearchEntry(e.target.value)}
-            placeholder="ex: 43205-2304"
-          ></input>
-          <button className="btn" type="submit"></button>
+          <legend className="fw-bold page-legend mb-4">
+            Enter a part number
+          </legend>
+
+          <div className="d-flex align-items-center gap-3 flex-wrap">
+            <label className="form-label fw-bold fs-5 pe-2">Part number:</label>
+            <input
+              type="search"
+              id="search-bar"
+              className="form-control"
+              style={{ maxWidth: '200px' }}
+              onChange={(e) => setSearchEntry(e.target.value)}
+              placeholder="ex: 43205-2304"
+            ></input>
+            <button className="btn" type="submit"></button>
+          </div>
         </fieldset>
       </form>
 

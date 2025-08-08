@@ -103,5 +103,5 @@ td.expanded {
 .page-legend {
   border-bottom: 4px solid transparent;
   border-image: linear-gradient(120deg, rgb(67 137 213), rgb(37, 45, 139)) 1;
-  border-radius: 8px; /* works with border-image */
+  border-radius: 8px;
 }

@@ -23,7 +23,6 @@ export default function Inventory() {
           }
         });
         const updated_loc = [...locations].sort();
-        // console.log(updated_loc);
         setLocationEntries(updated_loc);
       })
       .catch((err) => console.log(err));
@@ -60,6 +59,7 @@ export default function Inventory() {
   return (
     <div>
       <form
+        className="mb-2"
         onSubmit={(e) => {
           e.preventDefault();
           add_to_inventory(formData);
@@ -67,10 +67,13 @@ export default function Inventory() {
       >
         <fieldset>
           <legend className="fw-bold page-legend mb-4">
-            Enter a part and a location
+            Add to or search for a location
           </legend>
+
           <div className="d-flex align-items-center gap-3 flex-wrap">
-            <label className="fw-bold fs-5 pe-2">Add Part number:</label>
+            <label className="form-label fw-bold fs-5 pe-2">
+              Add part number:
+            </label>
             <input
               type="search"
               id="search-bar"
@@ -97,7 +100,7 @@ export default function Inventory() {
                 }))
               }
             >
-              <option>Select...</option>
+              <option value="">Select...</option>
               {locationEntries.map((location, index) => (
                 <option value={location} key={index}>
                   {location}
@@ -105,7 +108,7 @@ export default function Inventory() {
               ))}
             </select>
 
-            <button type="submit" className="btn btn-primary ms-2 p-2">
+            <button type="submit" className="btn btn-primary">
               Add location
             </button>
           </div>
@@ -158,9 +161,10 @@ export default function Inventory() {
           <table className="table table-dark table-striped table-hover text-start mw-100">
             <thead>
               <tr>
-                <th className="text-start column-name part-num-col" scope="col">
-                  Nothing here?
-                </th>
+                <th
+                  className="text-start column-name part-num-col"
+                  scope="col"
+                ></th>
               </tr>
             </thead>
           </table>

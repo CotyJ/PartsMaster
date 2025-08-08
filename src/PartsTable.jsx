@@ -24,19 +24,28 @@ export default function PartsTable() {
 
   return (
     <div>
-      <fieldset>
-        <legend className="fw-bold page-legend mb-4">
-          Filter by number or description
-        </legend>
-        <label className="fw-bold fs-5 pe-2">Part number:</label>
-        <input
-          type="search"
-          id="search-bar"
-          className="p-2 mx-0 rounded"
-          onChange={(e) => setSearchEntry(e.target.value)}
-          placeholder="ex: 43205-2304"
-        ></input>
-      </fieldset>
+      <form className="mb-2">
+        <fieldset>
+          <legend className="fw-bold page-legend mb-4">
+            Filter by number or description
+          </legend>
+
+          <div className="d-flex align-items-center gap-3 flex-wrap">
+            <label className="form-label fw-bold fs-5 pe-2">
+              Search part number:
+            </label>
+            <input
+              type="search"
+              id="search-bar"
+              // className="p-2 mx-0 rounded"
+              className="form-control"
+              style={{ maxWidth: '200px' }}
+              onChange={(e) => setSearchEntry(e.target.value)}
+              placeholder="ex: 43205-2304"
+            ></input>
+          </div>
+        </fieldset>
+      </form>
 
       <div className="overflow-y-auto" style={{ maxHeight: '85vh' }}>
         {partData.length > 0 ? (
