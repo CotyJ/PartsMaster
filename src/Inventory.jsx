@@ -18,13 +18,12 @@ export default function Inventory() {
             locations.add(item.os_location);
           }
         });
-        const updated_loc = [...locations].sort()
+        const updated_loc = [...locations].sort();
         console.log(updated_loc);
-        setLocationEntries(updated_loc)
+        setLocationEntries(updated_loc);
       })
       .catch((err) => console.log(err));
   };
-
 
   useEffect(() => {
     get_inventory();
@@ -50,7 +49,9 @@ export default function Inventory() {
 
             <label className="fw-bold fs-5 ps-4 pe-2 mb-0">Location:</label>
             <select className="form-select" style={{ maxWidth: '200px' }}>
-              {locationEntries.map((location) => <option>{location}</option>)}
+              {locationEntries.map((location) => (
+                <option>{location}</option>
+              ))}
             </select>
 
             <button className="btn btn-primary ms-2 p-2">Add location</button>
