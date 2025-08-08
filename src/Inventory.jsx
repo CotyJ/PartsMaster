@@ -97,7 +97,6 @@ export default function Inventory() {
                 }))
               }
             >
-              {/* Options map */}
               <option>Select...</option>
               {locationEntries.map((location, index) => (
                 <option value={location} key={index}>
@@ -144,7 +143,12 @@ export default function Inventory() {
                   <td>{item.part_description}</td>
                   <td className="text-center">{item.os_location}</td>
                   <td className="text-center">
-                    <button className="btn btn-sm btn-primary" onClick={() => delete_from_inventory(item.id)}>✓</button>
+                    <button
+                      className="btn btn-sm btn-primary"
+                      onClick={() => delete_from_inventory(item.id)}
+                    >
+                      ✓
+                    </button>
                   </td>
                 </tr>
               ))}
