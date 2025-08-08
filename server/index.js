@@ -189,6 +189,27 @@ app.get('/inventory', async (req, res) => {
   }
 });
 
+// Add to inventory
+app.put('/inventory/:part_number/:os_location', async (req, res) => {
+  try {
+    const { part_number, os_location } = req.params;
+    const results = await db.query(
+      `
+      INSERT INTO
+        overstock_locations
+        (part_number, os_location)
+      VALUES
+        ($1, $2)
+      `,
+      [`${part_number}`, `${os_location}`]
+    );
+    res.json(results.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
