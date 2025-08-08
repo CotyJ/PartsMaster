@@ -5,6 +5,10 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export default function Inventory() {
   const [inventoryList, setInventoryList] = useState([]);
   const [locationEntries, setLocationEntries] = useState([]);
+  const [formData, setFormData] = useState({
+    part_number: '',
+    os_location: '',
+  });
 
   const get_inventory = () => {
     const locations = new Set();
@@ -19,18 +23,24 @@ export default function Inventory() {
           }
         });
         const updated_loc = [...locations].sort();
-        console.log(updated_loc);
+        // console.log(updated_loc);
         setLocationEntries(updated_loc);
       })
       .catch((err) => console.log(err));
   };
 
-  const add_to_inventory = (entry) => {
-    if (entry.length == 10) {
+  const add_to_inventory = (data) => {
+    const { part_number, os_location } = data;
+    console.log(part_number, os_location);
+
+    if (part_number.length == 10 && locationEntries.includes(os_location)) {
       axios
-        .put(`${BASE_URL}/inventory/${entry}`)
+        .put(`${BASE_URL}/inventory/${part_number}/${os_location}`)
         .then(() => get_inventory())
         .catch((err) => console.error(err));
+      console.log('valid');
+    } else {
+      console.log('invalid entry');
     }
   };
 
@@ -40,7 +50,12 @@ export default function Inventory() {
 
   return (
     <div>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          add_to_inventory(formData);
+        }}
+      >
         <fieldset>
           <legend className="fw-bold page-legend mb-4">
             Enter a part and a location
@@ -53,17 +68,38 @@ export default function Inventory() {
               className="form-control"
               style={{ maxWidth: '200px' }}
               placeholder="ex: 43205-2304"
-              // onChange={''}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  part_number: e.target.value,
+                }))
+              }
             ></input>
 
             <label className="fw-bold fs-5 ps-4 pe-2 mb-0">Location:</label>
-            <select className="form-select" style={{ maxWidth: '200px' }}>
-              {locationEntries.map((location) => (
-                <option>{location}</option>
+            <select
+              className="form-select"
+              value={formData.os_location}
+              style={{ maxWidth: '200px' }}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  os_location: e.target.value,
+                }))
+              }
+            >
+              {/* Options map */}
+              <option>Select...</option>
+              {locationEntries.map((location, index) => (
+                <option value={location} key={index}>
+                  {location}
+                </option>
               ))}
             </select>
 
-            <button className="btn btn-primary ms-2 p-2">Add location</button>
+            <button type="submit" className="btn btn-primary ms-2 p-2">
+              Add location
+            </button>
           </div>
         </fieldset>
       </form>
