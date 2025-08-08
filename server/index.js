@@ -165,6 +165,73 @@ app.get('/where_used', async (req, res) => {
   }
 });
 
+// Get inventory
+app.get('/inventory', async (req, res) => {
+  try {
+    const results = await db.query(
+      `SELECT
+        overstock_locations.id,
+        parts.part_number,
+        parts.part_description,
+        overstock_locations.os_location
+      FROM
+        overstock_locations
+      JOIN
+        parts ON overstock_locations.part_number = parts.part_number
+      ORDER BY
+        part_number ASC
+      `
+    );
+    res.json(results.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
+// Add to inventory
+app.put('/inventory/:part_number/:os_location', async (req, res) => {
+  try {
+    const { part_number, os_location } = req.params;
+    const results = await db.query(
+      `
+      INSERT INTO
+        overstock_locations
+        (part_number, os_location)
+      VALUES
+        ($1, $2)
+      `,
+      [`${part_number}`, `${os_location}`]
+    );
+    res.json(results.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
+// Delete from inventory
+app.delete('/inventory/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const results = await db.query(
+        `
+        DELETE
+        FROM
+          overstock_locations
+        WHERE
+          id=$1
+        RETURNING *
+          `,
+        [id]
+      );
+      res.status(200).json(results.rows);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: 'Server error...' });
+    }
+  });
+
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });

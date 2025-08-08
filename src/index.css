@@ -28,7 +28,11 @@ a {
 }
 .nav-link:hover,
 .nav-link.active {
-  background-image: linear-gradient(to right, #4389d5, rgb(37, 45, 139));
+  background-image: linear-gradient(
+    to right,
+    rgb(67 137 213),
+    rgb(37, 45, 139)
+  );
   transition: background-image 0.3s ease-in-out;
 }
 
@@ -94,4 +98,10 @@ td.expanded {
 
 .accordion-body {
   background-color: rgb(61, 61, 61) !important;
+}
+
+.page-legend {
+  border-bottom: 4px solid transparent;
+  border-image: linear-gradient(120deg, rgb(67 137 213), rgb(37, 45, 139)) 1;
+  border-radius: 8px; /* works with border-image */
 }
