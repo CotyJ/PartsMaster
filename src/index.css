@@ -28,7 +28,11 @@ a {
 }
 .nav-link:hover,
 .nav-link.active {
-  background-image: linear-gradient(to right, rgb(67 137 213), rgb(37, 45, 139));
+  background-image: linear-gradient(
+    to right,
+    rgb(67 137 213),
+    rgb(37, 45, 139)
+  );
   transition: background-image 0.3s ease-in-out;
 }
 

@@ -42,7 +42,10 @@ export default function PartsTable() {
           <table className="table table-dark table-hover text-start mw-100">
             <thead>
               <tr>
-                <th className="text-center column-name part-num-col" scope="col">
+                <th
+                  className="text-center column-name part-num-col"
+                  scope="col"
+                >
                   <div className="column-name">Part Number</div>
                 </th>
                 <th className="text-start column-name col-auto" scope="col">
@@ -57,7 +60,7 @@ export default function PartsTable() {
             </tbody>
           </table>
         ) : (
-          <table className='table table-dark table-striped table-hover text-start mw-100'>
+          <table className="table table-dark table-striped table-hover text-start mw-100">
             <thead>
               <tr>
                 <th className="text-start column-name part-num-col" scope="col">
