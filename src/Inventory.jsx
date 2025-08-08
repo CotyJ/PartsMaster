@@ -45,6 +45,36 @@ export default function Inventory() {
           </div>
         </fieldset>
       </form>
+
+      <div className="overflow-y-auto" style={{ maxHeight: '85vh' }}>
+        {inventoryList.length > 0 ? (
+          <table className="table table-dark table-hover text-start mw-100">
+            <thead>
+              <tr>
+                <th
+                  className="text-center column-name part-num-col"
+                  scope="col"
+                >
+                  <div className="column-name">Part Number</div>
+                </th>
+                <th className="text-start column-name col-auto" scope="col">
+                  Description
+                </th>
+              </tr>
+            </thead>
+          </table>
+        ) : (
+          <table className="table table-dark table-striped table-hover text-start mw-100">
+            <thead>
+              <tr>
+                <th className="text-start column-name part-num-col" scope="col">
+                  Nothing here?
+                </th>
+              </tr>
+            </thead>
+          </table>
+        )}
+      </div>
     </div>
   );
 }
