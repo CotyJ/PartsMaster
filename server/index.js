@@ -165,6 +165,30 @@ app.get('/where_used', async (req, res) => {
   }
 });
 
+// Get inventory
+app.get('/inventory', async (req, res) => {
+  try {
+    const results = await db.query(
+      `SELECT
+        overstock_locations.id,
+        parts.part_number,
+        parts.part_description,
+        overstock_locations.os_location
+      FROM
+        overstock_locations
+      JOIN
+        parts ON overstock_locations.part_number = parts.part_number
+      ORDER BY
+        part_number ASC
+      `
+    );
+    res.json(results.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
