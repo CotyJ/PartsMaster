@@ -11,4 +11,4 @@ CREATE TABLE where_used (
   grouping_model TEXT
 );
 
-\copy where_used FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\processed\where_used.csv' DELIMITER ',' CSV HEADER;
+\copy where_used FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\where_used.csv' DELIMITER ',' CSV HEADER;

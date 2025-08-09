@@ -170,14 +170,14 @@ app.get('/inventory', async (req, res) => {
   try {
     const results = await db.query(
       `SELECT
-        overstock_locations.id,
+        inventory.id,
         parts.part_number,
         parts.part_description,
-        overstock_locations.os_location
+        inventory.os_location
       FROM
-        overstock_locations
+        inventory
       JOIN
-        parts ON overstock_locations.part_number = parts.part_number
+        parts ON inventory.part_number = parts.part_number
       ORDER BY
         part_number ASC
       `
@@ -196,7 +196,7 @@ app.put('/inventory/:part_number/:os_location', async (req, res) => {
     const results = await db.query(
       `
       INSERT INTO
-        overstock_locations
+        inventory
         (part_number, os_location)
       VALUES
         ($1, $2)
@@ -218,7 +218,7 @@ app.delete('/inventory/:id', async (req, res) => {
         `
         DELETE
         FROM
-          overstock_locations
+          inventory
         WHERE
           id=$1
         RETURNING *
