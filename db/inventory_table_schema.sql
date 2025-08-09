@@ -1,10 +1,10 @@
-DROP TABLE if exists overstock_locations;
+DROP TABLE if exists inventory;
 
-CREATE TABLE overstock_locations (
+CREATE TABLE inventory (
   id SERIAL PRIMARY KEY,
   part_number TEXT NOT NULL,
   os_location TEXT NOT NULL
 );
 
 -- Import query command
-\copy overstock_locations FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\overstock_locations.csv' DELIMITER ',' CSV HEADER;
+\copy inventory FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\inventory.csv' DELIMITER ',' CSV HEADER;
