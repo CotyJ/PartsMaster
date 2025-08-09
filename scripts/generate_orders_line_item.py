@@ -1,9 +1,12 @@
+import os
 import csv
 import random
 from datetime import datetime, timedelta
 
-PARTS_CSV = "parts.csv"
-ORDERS_CSV = "orders_line_item.csv"
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+orders_line_item_file_path = os.path.join(base_dir, "..", "data", "orders_line_item.csv")
+parts_file_path = os.path.join(base_dir, "..", "data", "parts.csv")
 
 NUM_POS = 100  # number of purchase orders
 MIN_LINE_ITEMS = 5
@@ -28,11 +31,11 @@ def random_date(start, end):
     random_days = random.randint(0, delta.days)
     return start + timedelta(days=random_days)
 
-def main():
-    parts = load_parts(PARTS_CSV)
+def generate_orders_line_item_csv():
+    parts = load_parts(parts_file_path)
     parts_by_number = {p['part_number']: p for p in parts}
 
-    with open(ORDERS_CSV, "w", newline='', encoding='utf-8') as f_out:
+    with open(orders_line_item_file_path, "w", newline='', encoding='utf-8') as f_out:
         fieldnames = ["id","old_id","po_number","part_number","li_cost","li","due_date","order_qty","invoice","received_qty","received_date"]
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         writer.writeheader()
@@ -103,4 +106,4 @@ def main():
                 li_num += 1
 
 if __name__ == "__main__":
-    main()
+    generate_orders_line_item_csv()
