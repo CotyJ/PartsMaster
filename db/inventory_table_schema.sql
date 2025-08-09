@@ -7,4 +7,4 @@ CREATE TABLE overstock_locations (
 );
 
 -- Import query command
-\copy overstock_locations FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\processed\overstock.csv' DELIMITER ',' CSV HEADER;
+\copy overstock_locations FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\overstock_locations.csv' DELIMITER ',' CSV HEADER;

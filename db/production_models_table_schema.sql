@@ -6,4 +6,4 @@ CREATE TABLE production_models (
   in_production BOOLEAN
 );
 
-\copy production_models FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\processed\production_models.csv' DELIMITER ',' CSV HEADER;
+\copy production_models FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\production_models.csv' DELIMITER ',' CSV HEADER;

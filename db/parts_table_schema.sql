@@ -53,4 +53,4 @@ CREATE TABLE parts (
 );
 
 -- Import query command
-\copy parts FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\processed\parts.csv' DELIMITER ',' CSV HEADER;
+\copy parts FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\parts.csv' DELIMITER ',' CSV HEADER;

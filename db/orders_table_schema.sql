@@ -15,7 +15,7 @@ CREATE TABLE orders (
 );
 
 -- COPY
-\copy orders FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\processed\orders_line_item.csv' DELIMITER ',' CSV HEADER;
+\copy orders FROM 'C:\Users\Falco\Documents\GitHub\JavaScript\PartsMaster\data\orders_line_item.csv' DELIMITER ',' CSV HEADER;
 
 
 -- Drop obsolete cols
