@@ -1,8 +1,11 @@
+import os
 import csv
 import random
 
-PARTS_CSV = "parts.csv"
-OVERSTOCK_CSV = "overstock_locations.csv"
+base_dir = os.path.dirname(os.path.abspath(__file__))
+overstock_locations_file_path = os.path.join(base_dir, "..", "data", "overstock_locations.csv")
+parts_file_path = os.path.join(base_dir, "..", "data", "parts.csv")
+
 
 # Location components
 PALLET_RACKS = ['A', 'B', 'C', 'D', 'E', 'F']
@@ -27,18 +30,18 @@ def generate_location():
     fb = random.choice(FRONT_BACK)
     return f"{rack}{side}-{row}{ns}{fb}"
 
-def main():
-    parts = load_parts(PARTS_CSV)
+def generate_overstock_locations_csv():
+    parts = load_parts(parts_file_path)
 
-    with open(OVERSTOCK_CSV, "w", newline='', encoding='utf-8') as f_out:
+    with open(overstock_locations_file_path, "w", newline='', encoding='utf-8') as f_out:
         fieldnames = ["id", "part_number", "os_location"]
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         writer.writeheader()
 
         row_id = 1
         for part in parts:
-            # Assign 0 to 3 overstock locations per part
-            num_locations = random.randint(0, 3)
+            # Assign 0 to 1 overstock locations per part
+            num_locations = random.randint(0, 1)
             assigned_locations = set()
 
             for _ in range(num_locations):
@@ -56,4 +59,4 @@ def main():
                 row_id += 1
 
 if __name__ == "__main__":
-    main()
+    generate_overstock_locations_csv()
