@@ -2,6 +2,7 @@ import os
 import csv
 import random
 import re
+import math
 
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -11,7 +12,7 @@ parts_file_path = os.path.join(base_dir, "..", "data", "parts.csv")
 
 # Config
 NUM_CHILDREN_MIN = 5
-NUM_CHILDREN_MAX = 15
+NUM_CHILDREN_MAX = 50
 
 # Reference designator prefixes by part type
 ref_prefix_map = {
@@ -59,52 +60,54 @@ def generate_reference_designators(child_parts):
         designators.append(designator)
     return designators
 
-def generate_where_used():
+def generate_where_used_csv():
     parts = load_parts(parts_file_path)
-    parents, children = categorize_parts(parts)
 
+    base_models = ["RTX3080", "RTX3090", "GTX1080", "GTX1070", "RX5700"]
+    revisions_per_model = 5
+    total_revisions = len(base_models) * revisions_per_model
+
+    # Calculate chunk size to split all parts evenly across all revisions
+    chunk_size = math.ceil(len(parts) / total_revisions)
+
+    where_used_rows = []
+    id_counter = 1
+
+    # Split parts into chunks, one chunk per revision
+    for i, base_model in enumerate(base_models):
+        for rev_num in range(1, revisions_per_model + 1):
+            model_name = f"{base_model} r.{rev_num}"
+
+            # Calculate which slice of parts this revision gets
+            idx = i * revisions_per_model + (rev_num - 1)
+            start = idx * chunk_size
+            end = start + chunk_size
+            assigned_parts = parts[start:end]
+
+            # If slice is empty (because of rounding), break early
+            if not assigned_parts:
+                continue
+
+            for part in assigned_parts:
+                where_used_rows.append({
+                    "id": id_counter,
+                    "bom_model": model_name,
+                    "parent_assembly": f"Parent Assy {id_counter}",
+                    "assembly_name": f"Assembly {id_counter}",
+                    "reference_designator": f"R{id_counter}",
+                    "part_number": part['part_number'],
+                    "part_description": part['part_description'],
+                    "grouping_model": model_name,
+                })
+                id_counter += 1
+
+    # Write CSV
     with open(where_used_file_path, "w", newline='', encoding='utf-8') as f_out:
         fieldnames = ["id","bom_model","parent_assembly","assembly_name","reference_designator","part_number","part_description","grouping_model"]
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         writer.writeheader()
-
-        row_id = 1
-
-        for parent in parents:
-            bom_model_base = re.sub(r" r\.\d+$", "", parent['part_name'] or "Assembly")
-            revision = random.randint(1,6)
-            bom_model = f"{bom_model_base} r.{revision}"
-
-            parent_assembly = parent['part_number']
-            assembly_name = parent['part_description'] or parent['part_name'] or "Unknown Assembly"
-            grouping_model = bom_model
-
-            num_children = random.randint(NUM_CHILDREN_MIN, NUM_CHILDREN_MAX)
-            # pick children randomly, allow duplicates but not same part multiple times
-            child_parts = random.sample(children, min(num_children, len(children)))
-
-            # reset designator counters per parent to keep designators consistent within assembly
-            counters = {key:1 for key in ref_prefix_map.keys()}
-
-            for child in child_parts:
-                ptype = child['part_type']
-                prefix = ref_prefix_map.get(ptype, "X")
-                desig_num = counters.get(ptype, 1)
-                reference_designator = f"{prefix}{desig_num}"
-                counters[ptype] = desig_num + 1
-
-                writer.writerow({
-                    "id": row_id,
-                    "bom_model": bom_model,
-                    "parent_assembly": parent_assembly,
-                    "assembly_name": assembly_name,
-                    "reference_designator": reference_designator,
-                    "part_number": child['part_number'],
-                    "part_description": child['part_description'],
-                    "grouping_model": grouping_model
-                })
-
-                row_id += 1
+        for row in where_used_rows:
+            writer.writerow(row)
 
 if __name__ == "__main__":
-    generate_where_used()
+    generate_where_used_csv()
