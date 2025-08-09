@@ -1,10 +1,15 @@
+import os
 import csv
 import random
 import re
 
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+where_used_file_path = os.path.join(base_dir, "..", "data", "where_used.csv")
+parts_file_path = os.path.join(base_dir, "..", "data", "parts.csv")
+
+
 # Config
-PARTS_CSV = "parts.csv"
-WHERE_USED_CSV = "where_used.csv"
 NUM_CHILDREN_MIN = 5
 NUM_CHILDREN_MAX = 15
 
@@ -54,11 +59,11 @@ def generate_reference_designators(child_parts):
         designators.append(designator)
     return designators
 
-def main():
-    parts = load_parts(PARTS_CSV)
+def generate_where_used():
+    parts = load_parts(parts_file_path)
     parents, children = categorize_parts(parts)
 
-    with open(WHERE_USED_CSV, "w", newline='', encoding='utf-8') as f_out:
+    with open(where_used_file_path, "w", newline='', encoding='utf-8') as f_out:
         fieldnames = ["id","bom_model","parent_assembly","assembly_name","reference_designator","part_number","part_description","grouping_model"]
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         writer.writeheader()
@@ -102,4 +107,4 @@ def main():
                 row_id += 1
 
 if __name__ == "__main__":
-    main()
+    generate_where_used()
