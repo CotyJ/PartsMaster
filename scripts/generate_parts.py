@@ -3,11 +3,8 @@ import csv
 import random
 from datetime import datetime, timedelta
 
-
-output_path = os.path.join('../data')
-os.makedirs(output_path, exist_ok=True)
-filename = "parts.csv"
-file_path = os.path.join(output_path, filename)
+base_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(base_dir, "..", "data", "parts.csv")
 
 random.seed(42)
 
@@ -129,176 +126,177 @@ def generate_part_description(ptype):
 
     return desc
 
-with open(file_path, "w", newline="") as f:
-    writer = csv.writer(f)
-    header = [
-        "id","user_name","part_number","part_description","dchapman_ok","dkrich_ok",
-        "date_added","std_cost","part_name","part_value","part_pwr","part_volt","part_tol",
-        "part_type","part_lead","part_package","part_basic","part_special",
-        "symbol_library_path1","symbol_library_ref1","symbol_library_ref2","symbol_library_ref3",
-        "footprint_path1","footprint_ref1","footprint_ref2","drawing_no","supplier_1",
-        "supplier_1_part_no","mfg","mfg_part_no","mfg_datasheet","mfg_2","mfg_2_part_no",
-        "mfg_2_datasheet","mfg_3","mfg_3_part_no","mfg_3_datasheet","lead_time_periods",
-        "moq","elytone_part_number","elytone_cost","kanban_reorder_qty","rohs_category",
-        "uom","note","cost_class","supplier_part_number1","supplier_1_EXTRA"
-    ]
-    writer.writerow(header)
+def generate_parts_csv():
+    with open(file_path, "w", newline="") as f:
+        writer = csv.writer(f)
+        header = [
+            "id","user_name","part_number","part_description","dchapman_ok","dkrich_ok",
+            "date_added","std_cost","part_name","part_value","part_pwr","part_volt","part_tol",
+            "part_type","part_lead","part_package","part_basic","part_special",
+            "symbol_library_path1","symbol_library_ref1","symbol_library_ref2","symbol_library_ref3",
+            "footprint_path1","footprint_ref1","footprint_ref2","drawing_no","supplier_1",
+            "supplier_1_part_no","mfg","mfg_part_no","mfg_datasheet","mfg_2","mfg_2_part_no",
+            "mfg_2_datasheet","mfg_3","mfg_3_part_no","mfg_3_datasheet","lead_time_periods",
+            "moq","elytone_part_number","elytone_cost","kanban_reorder_qty","rohs_category",
+            "uom","note","cost_class","supplier_part_number1","supplier_1_EXTRA"
+        ]
+        writer.writerow(header)
 
-    for i in range(1, NUM_ROWS+1):
-        part_type = random.choice(types)
-        part_num = generate_part_number(part_type)
-        part_desc = generate_part_description(part_type)
+        for i in range(1, NUM_ROWS+1):
+            part_type = random.choice(types)
+            part_num = generate_part_number(part_type)
+            part_desc = generate_part_description(part_type)
 
-        user = random.choice(["Keith C", "Darrell", "Alice", "Bob"])
-        date_added = random_date()
-        std_cost = round(random.uniform(0.01, 20.00), 2)
+            user = random.choice(["Keith C", "Darrell", "Alice", "Bob"])
+            date_added = random_date()
+            std_cost = round(random.uniform(0.01, 20.00), 2)
 
-        # Fill related fields based on part_type and properties or leave empty if not applicable
-        if part_type == "Resistor":
-            part_name = "Resistor"
-            part_value = part_desc.split(",")[0]
-            part_pwr = part_desc.split(",")[1].strip()
-            part_volt = ""
-            part_tol = part_desc.split(",")[2].strip()
-            part_lead = part_desc.split(",")[3].strip()
-            part_package = part_desc.split(",")[4].strip()
-            part_basic = part_desc.split(",")[5].replace(" Resistor", "").strip()
-            part_special = ""
-        elif part_type == "Capacitor":
-            vals = part_desc.split(",")
-            part_name = "Capacitor"
-            part_value = vals[0].strip()
-            part_pwr = ""
-            part_volt = vals[1].strip()
-            part_tol = vals[2].strip()
-            part_lead = vals[4].strip()
-            part_package = vals[5].strip()
-            part_basic = vals[6].replace(" Capacitor", "").strip()
-            part_special = ""
-        elif part_type == "Transistor":
-            vals = part_desc.split(",")
-            part_name = "Transistor"
-            part_value = ""
-            part_pwr = ""
-            part_volt = ""
-            part_tol = ""
-            part_lead = ""
-            part_package = vals[1].strip()
-            part_basic = vals[2].replace(" Transistor", "").strip()
-            part_special = vals[0].strip()
-        elif part_type == "Diode":
-            vals = part_desc.split(",")
-            part_name = "Diode"
-            part_value = ""
-            part_pwr = ""
-            part_volt = vals[1].strip()
-            part_tol = ""
-            part_lead = ""
-            part_package = vals[2].strip()
-            part_basic = ""
-            part_special = vals[0].strip()
-        elif part_type == "IC":
-            vals = part_desc.split(",")
-            part_name = "IC"
-            part_value = ""
-            part_pwr = ""
-            part_volt = ""
-            part_tol = ""
-            part_lead = ""
-            part_package = vals[1].strip()
-            part_basic = ""
-            part_special = vals[0].strip()
-        elif part_type == "Hardware":
-            vals = part_desc.split()
-            part_name = "Hardware"
-            part_value = ""
-            part_pwr = ""
-            part_volt = ""
-            part_tol = ""
-            part_lead = ""
-            part_package = ""
-            part_basic = vals[1]  # material
-            part_special = vals[2]  # type
-        elif part_type == "Connector":
-            vals = part_desc.split(",")
-            part_name = "Connector"
-            part_value = ""
-            part_pwr = ""
-            part_volt = ""
-            part_tol = ""
-            part_lead = ""
-            part_package = ""
-            part_basic = vals[0].strip()
-            part_special = vals[2].replace(" Connector", "").strip()
-        elif part_type == "Metal":
-            vals = part_desc.split()
-            part_name = "Metal"
-            part_value = ""
-            part_pwr = ""
-            part_volt = ""
-            part_tol = ""
-            part_lead = ""
-            part_package = ""
-            part_basic = vals[0]  # material
-            part_special = vals[1]  # type
-        elif part_type == "PCB":
-            vals = part_desc.split()
-            part_name = "PCB"
-            part_value = ""
-            part_pwr = ""
-            part_volt = ""
-            part_tol = ""
-            part_lead = ""
-            part_package = ""
-            part_basic = f"{vals[0]} {vals[1]}"
-            part_special = " ".join(vals[3:])  # rest of desc after size
-        else:
-            part_name = part_type
-            part_value = ""
-            part_pwr = ""
-            part_volt = ""
-            part_tol = ""
-            part_lead = ""
-            part_package = ""
-            part_basic = ""
-            part_special = ""
+            # Fill related fields based on part_type and properties or leave empty if not applicable
+            if part_type == "Resistor":
+                part_name = "Resistor"
+                part_value = part_desc.split(",")[0]
+                part_pwr = part_desc.split(",")[1].strip()
+                part_volt = ""
+                part_tol = part_desc.split(",")[2].strip()
+                part_lead = part_desc.split(",")[3].strip()
+                part_package = part_desc.split(",")[4].strip()
+                part_basic = part_desc.split(",")[5].replace(" Resistor", "").strip()
+                part_special = ""
+            elif part_type == "Capacitor":
+                vals = part_desc.split(",")
+                part_name = "Capacitor"
+                part_value = vals[0].strip()
+                part_pwr = ""
+                part_volt = vals[1].strip()
+                part_tol = vals[2].strip()
+                part_lead = vals[4].strip()
+                part_package = vals[5].strip()
+                part_basic = vals[6].replace(" Capacitor", "").strip()
+                part_special = ""
+            elif part_type == "Transistor":
+                vals = part_desc.split(",")
+                part_name = "Transistor"
+                part_value = ""
+                part_pwr = ""
+                part_volt = ""
+                part_tol = ""
+                part_lead = ""
+                part_package = vals[1].strip()
+                part_basic = vals[2].replace(" Transistor", "").strip()
+                part_special = vals[0].strip()
+            elif part_type == "Diode":
+                vals = part_desc.split(",")
+                part_name = "Diode"
+                part_value = ""
+                part_pwr = ""
+                part_volt = vals[1].strip()
+                part_tol = ""
+                part_lead = ""
+                part_package = vals[2].strip()
+                part_basic = ""
+                part_special = vals[0].strip()
+            elif part_type == "IC":
+                vals = part_desc.split(",")
+                part_name = "IC"
+                part_value = ""
+                part_pwr = ""
+                part_volt = ""
+                part_tol = ""
+                part_lead = ""
+                part_package = vals[1].strip()
+                part_basic = ""
+                part_special = vals[0].strip()
+            elif part_type == "Hardware":
+                vals = part_desc.split()
+                part_name = "Hardware"
+                part_value = ""
+                part_pwr = ""
+                part_volt = ""
+                part_tol = ""
+                part_lead = ""
+                part_package = ""
+                part_basic = vals[1]  # material
+                part_special = vals[2]  # type
+            elif part_type == "Connector":
+                vals = part_desc.split(",")
+                part_name = "Connector"
+                part_value = ""
+                part_pwr = ""
+                part_volt = ""
+                part_tol = ""
+                part_lead = ""
+                part_package = ""
+                part_basic = vals[0].strip()
+                part_special = vals[2].replace(" Connector", "").strip()
+            elif part_type == "Metal":
+                vals = part_desc.split()
+                part_name = "Metal"
+                part_value = ""
+                part_pwr = ""
+                part_volt = ""
+                part_tol = ""
+                part_lead = ""
+                part_package = ""
+                part_basic = vals[0]  # material
+                part_special = vals[1]  # type
+            elif part_type == "PCB":
+                vals = part_desc.split()
+                part_name = "PCB"
+                part_value = ""
+                part_pwr = ""
+                part_volt = ""
+                part_tol = ""
+                part_lead = ""
+                part_package = ""
+                part_basic = f"{vals[0]} {vals[1]}"
+                part_special = " ".join(vals[3:])  # rest of desc after size
+            else:
+                part_name = part_type
+                part_value = ""
+                part_pwr = ""
+                part_volt = ""
+                part_tol = ""
+                part_lead = ""
+                part_package = ""
+                part_basic = ""
+                part_special = ""
 
-        symbol_lib_ref = f"{part_name}Symbol"
-        footprint_ref = f"{part_name}Footprint"
-        drawing_no = f"DRAW-{random.randint(1000,9999)}"
-        supplier_1 = random.choice(suppliers)
-        supplier_1_part_no = f"S-{random.randint(100000,999999)}"
-        mfg = random.choice(mfgs)
-        mfg_part_no = f"M-{random.randint(100000,999999)}"
-        mfg_datasheet = f"http://datasheets.example.com/{mfg_part_no}.pdf"
-        mfg_2 = random.choice(mfgs)
-        mfg_2_part_no = f"M2-{random.randint(100000,999999)}"
-        mfg_2_datasheet = f"http://datasheets.example.com/{mfg_2_part_no}.pdf"
-        mfg_3 = random.choice(mfgs)
-        mfg_3_part_no = f"M3-{random.randint(100000,999999)}"
-        mfg_3_datasheet = f"http://datasheets.example.com/{mfg_3_part_no}.pdf"
-        lead_time_periods = random.randint(1, 12)
-        moq = random.randint(1, 1000)
-        elytone_part_number = f"E-{random.randint(10000,99999)}"
-        elytone_cost = round(random.uniform(0.01, 20.00), 2)
-        kanban_reorder_qty = str(random.choice([10, 25, 50, 100]))
-        rohs_category = random.choice(["RoHS Compliant", "Non-RoHS"])
-        uom = random.choice(["Ea", "Pack", "Reel"])
-        note = ""
-        cost_class = random.choice(["A", "B", "C"])
-        supplier_part_number1 = supplier_1_part_no
-        supplier_1_EXTRA = ""
+            symbol_lib_ref = f"{part_name}Symbol"
+            footprint_ref = f"{part_name}Footprint"
+            drawing_no = f"DRAW-{random.randint(1000,9999)}"
+            supplier_1 = random.choice(suppliers)
+            supplier_1_part_no = f"S-{random.randint(100000,999999)}"
+            mfg = random.choice(mfgs)
+            mfg_part_no = f"M-{random.randint(100000,999999)}"
+            mfg_datasheet = f"http://datasheets.example.com/{mfg_part_no}.pdf"
+            mfg_2 = random.choice(mfgs)
+            mfg_2_part_no = f"M2-{random.randint(100000,999999)}"
+            mfg_2_datasheet = f"http://datasheets.example.com/{mfg_2_part_no}.pdf"
+            mfg_3 = random.choice(mfgs)
+            mfg_3_part_no = f"M3-{random.randint(100000,999999)}"
+            mfg_3_datasheet = f"http://datasheets.example.com/{mfg_3_part_no}.pdf"
+            lead_time_periods = random.randint(1, 12)
+            moq = random.randint(1, 1000)
+            elytone_part_number = f"E-{random.randint(10000,99999)}"
+            elytone_cost = round(random.uniform(0.01, 20.00), 2)
+            kanban_reorder_qty = str(random.choice([10, 25, 50, 100]))
+            rohs_category = random.choice(["RoHS Compliant", "Non-RoHS"])
+            uom = random.choice(["Ea", "Pack", "Reel"])
+            note = ""
+            cost_class = random.choice(["A", "B", "C"])
+            supplier_part_number1 = supplier_1_part_no
+            supplier_1_EXTRA = ""
 
-        dchapman_ok = random.choice([True, False])
-        dkrich_ok = random.choice([True, False])
+            dchapman_ok = random.choice([True, False])
+            dkrich_ok = random.choice([True, False])
 
-        writer.writerow([
-            i, user, part_num, part_desc, dchapman_ok, dkrich_ok, date_added.strftime("%Y-%m-%d %H:%M:%S"),
-            std_cost, part_name, part_value, part_pwr, part_volt, part_tol, part_type, part_lead,
-            part_package, part_basic, part_special, symbol_lib_path, symbol_lib_ref, "", "",
-            footprint_path, footprint_ref, "", drawing_no, supplier_1, supplier_1_part_no,
-            mfg, mfg_part_no, mfg_datasheet, mfg_2, mfg_2_part_no, mfg_2_datasheet,
-            mfg_3, mfg_3_part_no, mfg_3_datasheet, lead_time_periods, moq, elytone_part_number,
-            elytone_cost, kanban_reorder_qty, rohs_category, uom, note, cost_class,
-            supplier_part_number1, supplier_1_EXTRA
-        ])
+            writer.writerow([
+                i, user, part_num, part_desc, dchapman_ok, dkrich_ok, date_added.strftime("%Y-%m-%d %H:%M:%S"),
+                std_cost, part_name, part_value, part_pwr, part_volt, part_tol, part_type, part_lead,
+                part_package, part_basic, part_special, symbol_lib_path, symbol_lib_ref, "", "",
+                footprint_path, footprint_ref, "", drawing_no, supplier_1, supplier_1_part_no,
+                mfg, mfg_part_no, mfg_datasheet, mfg_2, mfg_2_part_no, mfg_2_datasheet,
+                mfg_3, mfg_3_part_no, mfg_3_datasheet, lead_time_periods, moq, elytone_part_number,
+                elytone_cost, kanban_reorder_qty, rohs_category, uom, note, cost_class,
+                supplier_part_number1, supplier_1_EXTRA
+            ])
