@@ -81,7 +81,7 @@ export default function AccordionItem({ part }) {
               </div>
 
               {/* Status section */}
-              <div className="col-2 col-sm-6 col-md-6 col-lg-2 order-2">
+              <div className="col-2 col-sm-6 col-md-6 col-lg-3 order-2">
                 <h4
                   className="text-center"
                   style={{ borderBottom: '1px solid white' }}
@@ -89,19 +89,17 @@ export default function AccordionItem({ part }) {
                   Status
                 </h4>
                 <ul className='list-unstyled px-auto'>
-                  <li className='text-center'>{isInProduction ? <h5 className='text-nowrap'>✅ In production</h5> : <h5 className='text-nowrap fw-bold'>❌ OBSOLETE</h5>}</li>
-                  <li className='text-center'>on order</li>
-                  <li className='text-center'>
-                    <button className="btn btn-primary" disabled={isOnOrder}>
-                      Replenish
-                    </button>
-                  </li>
+                  <li className='text-center py-1'>{isInProduction ? <h5 className='text-nowrap'>In production ✅</h5> : <h5 className='text-nowrap'>OBSOLETE ❌</h5>}</li>
+                  <li className='text-center py-1'>{haveOverstock ? <h5 className='text-nowrap'>Have stock ❌</h5> : <h5 className='text-nowrap'>Not in stock ✅</h5>}</li>
+                  <li className='text-center py-1'>{isOnOrder ? <h5 className='text-nowrap'>On order ❌</h5> : <h5 className='text-nowrap'>Not on order ✅</h5>}</li>
+                  <li className='text-center py-1'>{isInReplenish ? <h5 className='text-nowrap'>Already requested ❌</h5> : <h5 className='text-nowrap'>Not requested ✅</h5>}</li>
+                  <li className='text-center py-1'><button className="btn btn-primary text-nowrap fw-bold" disabled={isOnOrder || !isInProduction || haveOverstock}>Request replenish</button></li>
                   <li></li>
                 </ul>
               </div>
 
               {/* Details section */}
-              <div className="col-8 order-3 order-sm-3 order-md-3 col-lg-8 col-md-12 col-sm-12">
+              <div className="col-8 col-sm-12 col-md-12 col-lg-7 order-3 order-sm-3 order-md-3">
                 <div className="row">
                   {Object.keys(part)
                     .filter((key) => !filteredKeys.includes(key))
@@ -115,7 +113,7 @@ export default function AccordionItem({ part }) {
                       }
 
                       return displayValue ? (
-                        <div key={key} className="col-5 mb-4 ms-4">
+                        <div key={key} className="col-6 mb-4">
                           <h4 style={{ borderBottom: '1px solid white' }}>
                             {key}
                           </h4>
