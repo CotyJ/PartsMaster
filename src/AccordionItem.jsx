@@ -8,7 +8,6 @@ export default function AccordionItem({ part }) {
   // temporary to test status column
   const [isOnOrder, setisOnOrder] = useState(false);
   const [isInProduction, setisInProduction] = useState(true);
-  const [haveOverstock, setHaveOverstock] = useState(false);
   const [isInReplenish, setisInReplenish] = useState(false);
 
   const filteredKeys = ['id', 'part_number', 'part_description'];
@@ -89,11 +88,10 @@ export default function AccordionItem({ part }) {
                   Status
                 </h4>
                 <ul className='list-unstyled px-auto'>
-                  <li className='text-center py-1'>{isInProduction ? <h5 className='text-nowrap'>In production ✅</h5> : <h5 className='text-nowrap'>OBSOLETE ❌</h5>}</li>
-                  <li className='text-center py-1'>{haveOverstock ? <h5 className='text-nowrap'>Have stock ❌</h5> : <h5 className='text-nowrap'>Not in stock ✅</h5>}</li>
-                  <li className='text-center py-1'>{isOnOrder ? <h5 className='text-nowrap'>On order ❌</h5> : <h5 className='text-nowrap'>Not on order ✅</h5>}</li>
                   <li className='text-center py-1'>{isInReplenish ? <h5 className='text-nowrap'>Already requested ❌</h5> : <h5 className='text-nowrap'>Not requested ✅</h5>}</li>
-                  <li className='text-center py-1'><button className="btn btn-primary text-nowrap fw-bold" disabled={isOnOrder || !isInProduction || haveOverstock}>Request replenish</button></li>
+                  <li className='text-center py-1'>{isInProduction ? <h5 className='text-nowrap'>In production ✅</h5> : <h5 className='text-nowrap'>OBSOLETE ❌</h5>}</li>
+                  <li className='text-center py-1'>{isOnOrder ? <h5 className='text-nowrap'>On order ❌</h5> : <h5 className='text-nowrap'>Not on order ✅</h5>}</li>
+                  <li className='text-center py-1'><button className="btn btn-primary text-nowrap fw-bold" value={part.part_number} onClick={(e) => console.log("replenish me: ", e.target.value)} disabled={isOnOrder || !isInProduction || isInReplenish}>Request replenish</button></li>
                   <li></li>
                 </ul>
               </div>
