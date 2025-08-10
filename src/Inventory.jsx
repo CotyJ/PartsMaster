@@ -77,6 +77,7 @@ export default function Inventory() {
             <input
               type="search"
               id="search-bar"
+              autoFocus="autofocus"
               className="form-control"
               style={{ maxWidth: '200px' }}
               placeholder="ex: 43205-2304"

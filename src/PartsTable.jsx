@@ -37,6 +37,7 @@ export default function PartsTable() {
             <input
               type="search"
               id="search-bar"
+              autoFocus="autofocus"
               className="form-control"
               style={{ maxWidth: '200px' }}
               onChange={(e) => setSearchEntry(e.target.value)}

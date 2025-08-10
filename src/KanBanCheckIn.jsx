@@ -97,6 +97,7 @@ export default function KanBanCheckIn() {
               type="search"
               id="search-bar"
               className="form-control"
+              autoFocus="autofocus"
               style={{ maxWidth: '200px' }}
               onChange={(e) => setSearchEntry(e.target.value)}
               placeholder="ex: 43205-2304"
