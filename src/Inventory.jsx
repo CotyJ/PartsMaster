@@ -37,8 +37,8 @@ export default function Inventory() {
         .put(`${BASE_URL}/inventory/${part_number}/${os_location}`)
         .then(() => get_inventory())
         .catch((err) => console.error(err));
-      console.log('valid');
     } else {
+      // TODO: add something better here
       console.log('invalid entry');
     }
   };
