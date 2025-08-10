@@ -18,8 +18,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="parts-table" element={<PartsTable />}/>
+          {/* <Route index element={<Home />} />  */}
+          <Route index path="parts-table" element={<PartsTable />}/>
           <Route path="orders" element={<Orders />}/>
           <Route path="kb-checkin" element={<KanBanCheckIn />}/>
           <Route path="parts-receiving" element={<PartsReceiving />}/>

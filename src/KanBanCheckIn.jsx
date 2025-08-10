@@ -9,7 +9,7 @@ export default function KanBanCheckIn() {
   const [numberSortedAsc, setNumberSortedAsc] = useState(null);
 
   // temporary to test button
-  const [isOnOrder, setisOnOrder] = useState(true);
+  const [isOnOrder, setisOnOrder] = useState(false);
 
   // get cards
   const get_kanban_cards = () => {

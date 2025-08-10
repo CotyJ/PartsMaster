@@ -92,7 +92,6 @@ export default function AccordionItem({ part }) {
                   <li className='text-center py-1'>{isInProduction ? <h5 className='text-nowrap'>In production ✅</h5> : <h5 className='text-nowrap'>OBSOLETE ❌</h5>}</li>
                   <li className='text-center py-1'>{isOnOrder ? <h5 className='text-nowrap'>On order ❌</h5> : <h5 className='text-nowrap'>Not on order ✅</h5>}</li>
                   <li className='text-center py-1'><button className="btn btn-primary text-nowrap fw-bold" value={part.part_number} onClick={(e) => console.log("replenish me: ", e.target.value)} disabled={isOnOrder || !isInProduction || isInReplenish}>Request replenish</button></li>
-                  <li></li>
                 </ul>
               </div>
 
