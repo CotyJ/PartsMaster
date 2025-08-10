@@ -4,8 +4,12 @@ import axios from 'axios';
 export default function AccordionItem({ part }) {
   const [whereUsed, setWhereUsed] = useState([]);
   const [expandedPartId, setExpandedPartId] = useState(null);
+
+  // temporary to test status column
   const [isOnOrder, setisOnOrder] = useState(false);
-  const [isInProduction, setisInProduction] = useState(false);
+  const [isInProduction, setisInProduction] = useState(true);
+  const [haveOverstock, setHaveOverstock] = useState(false);
+  const [isInReplenish, setisInReplenish] = useState(false);
 
   const filteredKeys = ['id', 'part_number', 'part_description'];
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
