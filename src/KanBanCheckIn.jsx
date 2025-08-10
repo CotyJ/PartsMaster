@@ -8,6 +8,9 @@ export default function KanBanCheckIn() {
   const [dateSortedAsc, setDateSortedAsc] = useState(true);
   const [numberSortedAsc, setNumberSortedAsc] = useState(null);
 
+  // temporary to test button
+  const [isOnOrder, setisOnOrder] = useState(true);
+
   // get cards
   const get_kanban_cards = () => {
     axios
@@ -145,6 +148,14 @@ export default function KanBanCheckIn() {
                   </div>
                 )}
               </th>
+
+              <th
+                className="text-center col-1 text-nowrap column-name"
+                scope="col"
+              >
+                Ordered?
+              </th>
+
               <th
                 className="text-center col-1 text-nowrap column-name"
                 scope="col"
@@ -163,8 +174,18 @@ export default function KanBanCheckIn() {
                 <td>{item.part_description}</td>
                 <td className="text-center">{item.date_added}</td>
                 <td className="text-center">
+                  <li className="text-center ">
+                    <button
+                      className="btn btn-sm btn-primary text-nowrap fw-bold"
+                      disabled={isOnOrder}
+                    >
+                      {isOnOrder ? 'Ordered' : 'Order'}
+                    </button>
+                  </li>
+                </td>
+                <td className="text-center">
                   <button
-                    className="btn btn-sm btn-primary"
+                    className="btn btn-sm btn-primary text-nowrap fw-bold"
                     onClick={() => delete_card(item.id)}
                   >
                     ✓
