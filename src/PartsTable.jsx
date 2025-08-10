@@ -37,7 +37,6 @@ export default function PartsTable() {
             <input
               type="search"
               id="search-bar"
-              // className="p-2 mx-0 rounded"
               className="form-control"
               style={{ maxWidth: '200px' }}
               onChange={(e) => setSearchEntry(e.target.value)}
