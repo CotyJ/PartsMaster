@@ -212,10 +212,10 @@ app.put('/inventory/:part_number/:os_location', async (req, res) => {
 
 // Delete from inventory
 app.delete('/inventory/:id', async (req, res) => {
-    try {
-      const { id } = req.params;
-      const results = await db.query(
-        `
+  try {
+    const { id } = req.params;
+    const results = await db.query(
+      `
         DELETE
         FROM
           inventory
@@ -223,14 +223,33 @@ app.delete('/inventory/:id', async (req, res) => {
           id=$1
         RETURNING *
           `,
-        [id]
-      );
-      res.status(200).json(results.rows);
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ error: 'Server error...' });
-    }
-  });
+      [id]
+    );
+    res.status(200).json(results.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
+
+// Get all orders
+app.get('/orders', async (req, res) => {
+  try {
+    const results = await db.query(`
+    SELECT
+      *
+    FROM
+      orders
+    ORDER BY
+      po_number DESC,
+      part_number ASC
+    `);
+    res.json(results.rows);
+  } catch (error) {
+    console.log(err);
+    res.status(500).json({ error: 'Server error...' });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

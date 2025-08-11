@@ -37,7 +37,7 @@ export default function PartsTable() {
             <input
               type="search"
               id="search-bar"
-              // className="p-2 mx-0 rounded"
+              autoFocus="autofocus"
               className="form-control"
               style={{ maxWidth: '200px' }}
               onChange={(e) => setSearchEntry(e.target.value)}
@@ -58,7 +58,7 @@ export default function PartsTable() {
                 >
                   <div className="column-name">Part Number</div>
                 </th>
-                <th className="text-start column-name col-auto" scope="col">
+                <th className="text-start column-name col-auto" scope="col"> {/* // NOTE: inconsistent */}
                   Description
                 </th>
               </tr>

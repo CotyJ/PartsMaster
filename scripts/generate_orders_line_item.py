@@ -8,7 +8,7 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 orders_line_item_file_path = os.path.join(base_dir, "..", "data", "orders_line_item.csv")
 parts_file_path = os.path.join(base_dir, "..", "data", "parts.csv")
 
-NUM_POS = 100  # number of purchase orders
+NUM_POS = 50  # number of purchase orders
 MIN_LINE_ITEMS = 5
 MAX_LINE_ITEMS = 20
 
@@ -16,7 +16,7 @@ START_PO_NUMBER = 200000
 
 # Date range for due dates
 START_DATE = datetime(2020, 1, 1)
-END_DATE = datetime(2024, 7, 1)
+END_DATE = datetime(2025, 8, 1)
 
 def load_parts(filename):
     parts = []

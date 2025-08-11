@@ -105,3 +105,12 @@ td.expanded {
   border-image: linear-gradient(120deg, rgb(67 137 213), rgb(37, 45, 139)) 1;
   border-radius: 8px;
 }
+
+.collapse-show {
+  background-color: rgb(147, 147, 147);
+}
+
+.btn-primary {
+  background-color:#0051cc !important;
+  border: 2px solid rgb(176, 176, 176) !important;
+}

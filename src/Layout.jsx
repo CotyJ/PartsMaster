@@ -8,12 +8,12 @@ export default function Layout() {
             <div className="col-auto">
               <nav className="row navbar d-flex justify-content-between mt-0 pt-0 min-vh-100 align-items-start" id="nav-bar">
                 <ul className="navbar-nav">
-                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/">Home</NavLink></li>
+                  {/* <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/">Home</NavLink></li> */}
                   <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/parts-table">Parts Lookup</NavLink></li>
-                  {/* <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/orders">Orders</NavLink></li> */}
                   <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/kb-checkin">To Replenish</NavLink></li>
-                  {/* <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/parts-receiving">Parts Receiving</NavLink></li> */}
                   <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/inventory">Inventory</NavLink></li>
+                  <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/orders">Orders</NavLink></li>
+                  {/* <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/parts-receiving">Parts Receiving</NavLink></li> */}
                 </ul>
               </nav>
             </div>
