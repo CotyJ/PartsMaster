@@ -7,7 +7,6 @@ export default function Orders() {
   const [orderFilter, setOrderFilter] = useState('all');
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  //get all orders
   const get_orders_line_item = () => {
     const purchase_order_numbers = new Set();
     axios
@@ -20,7 +19,6 @@ export default function Orders() {
         });
         const updatedPOs = [...purchase_order_numbers];
         setOrderNumbers(updatedPOs);
-        console.log(updatedPOs);
       })
       .catch((err) => console.log(err));
   };
