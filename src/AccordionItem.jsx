@@ -7,6 +7,9 @@ export default function AccordionItem({ part }) {
   const filteredKeys = ['id', 'part_number', 'part_description'];
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+  const [isInProduction, setisInProduction] = useState(true);
+  const [isInReplenish, setisInReplenish] = useState(true);
+
   const get_where_used = (part_number) => {
     axios
       .get(`${BASE_URL}/where_used?part_number=${part_number}`)
