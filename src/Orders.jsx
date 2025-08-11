@@ -3,13 +3,24 @@ import { useEffect, useState } from 'react';
 
 export default function Orders() {
   const [ordersLineItemData, setOrdersLineItemData] = useState([]);
+  const [orderNumbers, setOrderNumbers] = useState([]);
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   //get all orders
   const get_orders_line_item = () => {
+    const purchase_order_numbers = new Set();
     axios
       .get(`${BASE_URL}/orders`)
-      .then((response) => setOrdersLineItemData(response.data))
+      .then((response) => {
+        const { data } = response;
+        setOrdersLineItemData(data);
+        data.forEach((item) => {
+          purchase_order_numbers.add(item.po_number);
+        });
+        const updatedPOs = [...purchase_order_numbers];
+        setOrderNumbers(updatedPOs);
+        console.log(updatedPOs); // LOG
+      })
       .catch((err) => console.log(err));
   };
 
@@ -30,21 +41,14 @@ export default function Orders() {
               Filter by Purchase Order:
             </label>
 
-            <select>
-
+            <select id='po-filter' className="form-control" style={{ maxWidth: '200px' }}>
+              <option value="">Select...</option>
+              {orderNumbers.map((number, index) => (
+                <option value={number} key={index}>
+                  {number}
+                </option>
+              ))}
             </select>
-
-{/* replace with select and options */}
-            <input
-              type="search"
-              id="search-bar"
-              autoFocus="autofocus"
-              className="form-control"
-              style={{ maxWidth: '200px' }}
-              onChange={(e) => console.log(e.target.value)}
-              placeholder="ex: 43205-2304"
-            ></input>
-
 
           </div>
         </fieldset>
@@ -88,21 +92,28 @@ export default function Orders() {
           </tr>
         </thead>
 
-      <tbody>
-        {ordersLineItemData.map((item) => (
-          <tr key={item.id}>
-            <td className="text-center">{item.po_number}</td>
-            <td className="text-center">{item.part_number}</td>
-            <td className="text-center">{`$${item.li_cost}`}</td>
-            <td className="text-center">{item.order_qty}</td>
-            <td className="text-center">{`$${(item.li_cost * item.order_qty).toFixed(2)}`}</td>
-            <td className="text-center">{(item.due_date).split('T')[0]}</td>
-            <td className="text-center">{item.received_qty}</td>
-            <td className="text-center">{item.received_date !== null ? (item.received_date).split('T')[0] : ''}</td>
-          </tr>
-        ))}
-      </tbody>
-        </table>
+        <tbody>
+          {ordersLineItemData
+          .map((item) => (
+            <tr key={item.id}>
+              <td className="text-center">{item.po_number}</td>
+              <td className="text-center">{item.part_number}</td>
+              <td className="text-center">{`$${item.li_cost}`}</td>
+              <td className="text-center">{item.order_qty}</td>
+              <td className="text-center">{`$${(
+                item.li_cost * item.order_qty
+              ).toFixed(2)}`}</td>
+              <td className="text-center">{item.due_date.split('T')[0]}</td>
+              <td className="text-center">{item.received_qty}</td>
+              <td className="text-center">
+                {item.received_date !== null
+                  ? item.received_date.split('T')[0]
+                  : ''}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
