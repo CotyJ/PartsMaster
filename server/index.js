@@ -155,10 +155,34 @@ app.get('/where_used', async (req, res) => {
   try {
     const { part_number } = req.query;
     const results = await db.query(
-      `SELECT bom_model FROM where_used WHERE part_number = $1 GROUP BY bom_model`,
-      [`${part_number}`]
+      `
+      SELECT
+        ARRAY_AGG(DISTINCT w.bom_model) AS bom_models,
+        BOOL_OR(pm.in_production = 't') AS any_in_production,
+        EXISTS (
+          SELECT 1 FROM kanban_cards kc WHERE kc.part_number = $1
+        ) AS is_requested
+      FROM
+        where_used w
+      LEFT JOIN
+        production_models pm ON w.bom_model = pm.model
+      WHERE
+        w.part_number = $1;
+      `,
+      [part_number]
     );
-    res.json(results.rows);
+
+    // If no rows returned, send defaults:
+    if (results.rows.length === 0) {
+      return res.json({
+        part_number,
+        models_used_in: [],
+        is_in_production: false,
+        is_requested: false,
+        is_on_order: false,
+      });
+    }
+    res.json(results.rows[0]);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error...' });

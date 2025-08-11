@@ -4,20 +4,28 @@ import axios from 'axios';
 export default function AccordionItem({ part }) {
   const [whereUsed, setWhereUsed] = useState([]);
   const [expandedPartId, setExpandedPartId] = useState(null);
-
-  // temporary to test status column
-  const [isOnOrder, setisOnOrder] = useState(false);
-  const [isInProduction, setisInProduction] = useState(true);
-  const [isInReplenish, setisInReplenish] = useState(false);
-
   const filteredKeys = ['id', 'part_number', 'part_description'];
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  const get_where_used = (value) => {
+  const get_where_used = (part_number) => {
     axios
-      .get(`${BASE_URL}/where_used?part_number=${value}`)
-      .then((response) => setWhereUsed(response.data))
-      .catch((err) => console.log(err, ' Error getting part'));
+      .get(`${BASE_URL}/where_used?part_number=${part_number}`)
+      .then(({ data }) => {
+        const { any_in_production, bom_models, is_requested } = data;
+        setisInProduction(any_in_production);
+        setisInReplenish(is_requested);
+        setWhereUsed(bom_models);
+      })
+      .catch((err) => console.error(err, 'Error getting part usage info'));
+  };
+
+  const card_checkin = (entry) => {
+    if (entry.length == 10) {
+      axios
+        .put(`${BASE_URL}/kanban/${entry}`)
+        .then(() => setisInReplenish(true))
+        .catch((err) => console.error(err));
+    }
   };
 
   const expand_item = (id) => {
@@ -53,13 +61,7 @@ export default function AccordionItem({ part }) {
               borderRadius: '8px',
             }}
           >
-
-
-            {/* Dropdown section */}
-
             <div className="row flex-wrap">
-
-              {/* Where Used section */}
               <div className="col-2 col-sm-6 col-md-6 col-lg-2 order-1">
                 <h4
                   className="text-center"
@@ -69,17 +71,12 @@ export default function AccordionItem({ part }) {
                 </h4>
                 <ul className="p-0">
                   {whereUsed
-                    .filter((item) => item.bom_model !== null)
+                    .filter((item) => item)
                     .map((item) => (
-                      <li
-                        key={item.bom_model}
-                        className="text-center"
-                      >{`${item.bom_model}`}</li>
+                      <li key={item} className="text-center">{`${item}`}</li>
                     ))}
                 </ul>
               </div>
-
-              {/* Status section */}
               <div className="col-2 col-sm-6 col-md-6 col-lg-3 order-2">
                 <h4
                   className="text-center"
@@ -87,15 +84,42 @@ export default function AccordionItem({ part }) {
                 >
                   Status
                 </h4>
-                <ul className='list-unstyled px-auto'>
-                  <li className='text-center py-1'>{isInReplenish ? <h5 className='text-nowrap'>Already requested ❌</h5> : <h5 className='text-nowrap'>Not requested ✅</h5>}</li>
-                  <li className='text-center py-1'>{isInProduction ? <h5 className='text-nowrap'>In production ✅</h5> : <h5 className='text-nowrap'>OBSOLETE ❌</h5>}</li>
-                  <li className='text-center py-1'>{isOnOrder ? <h5 className='text-nowrap'>On order ❌</h5> : <h5 className='text-nowrap'>Not on order ✅</h5>}</li>
-                  <li className='text-center py-1'><button className="btn btn-primary text-nowrap fw-bold" value={part.part_number} onClick={(e) => console.log("replenish me: ", e.target.value)} disabled={isOnOrder || !isInProduction || isInReplenish}>Request replenish</button></li>
+                <ul className="list-unstyled px-auto">
+                  <li className="text-center py-1">
+                    {isInReplenish ? (
+                      <h5 className="text-nowrap">Already requested ❌</h5>
+                    ) : (
+                      <h5 className="text-nowrap">Not requested ✅</h5>
+                    )}
+                  </li>
+                  <li className="text-center py-1">
+                    {isInProduction ? (
+                      <h5 className="text-nowrap">In production ✅</h5>
+                    ) : (
+                      <h5 className="text-nowrap">OBSOLETE ❌</h5>
+                    )}
+                  </li>
+                  <li className="text-center py-1">
+                    {/* {isOnOrder ? (
+                      <h5 className="text-nowrap">On order ❌</h5>
+                    ) : (
+                      <h5 className="text-nowrap">Not on order ✅</h5>
+                    )} */}
+                  </li>
+                  <li className="text-center py-1">
+                    <button
+                      className="btn btn-primary text-nowrap fw-bold"
+                      value={part.part_number}
+                      onClick={(e) => card_checkin(e.target.value)}
+                      disabled={
+                        /*isOnOrder || */ !isInProduction || isInReplenish
+                      }
+                    >
+                      Request replenish
+                    </button>
+                  </li>
                 </ul>
               </div>
-
-              {/* Details section */}
               <div className="col-8 col-sm-12 col-md-12 col-lg-7 order-3 order-sm-3 order-md-3">
                 <div className="row">
                   {Object.keys(part)
@@ -108,7 +132,6 @@ export default function AccordionItem({ part }) {
                       } else {
                         displayValue = value;
                       }
-
                       return displayValue ? (
                         <div key={key} className="col-6 mb-4">
                           <h4 style={{ borderBottom: '1px solid white' }}>
@@ -120,7 +143,6 @@ export default function AccordionItem({ part }) {
                     })}
                 </div>
               </div>
-
             </div>
           </div>
         </td>
