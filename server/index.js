@@ -241,7 +241,8 @@ app.get('/orders', async (req, res) => {
     FROM
       orders
     ORDER BY
-      po_number DESC
+      po_number DESC,
+      part_number ASC
     `);
     res.json(results.rows);
   } catch (error) {
