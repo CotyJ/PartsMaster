@@ -1,5 +1,5 @@
 # Mine
-.env.local
+.env
 /data
 
 # Logs
