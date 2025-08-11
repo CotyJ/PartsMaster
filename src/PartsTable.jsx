@@ -58,7 +58,7 @@ export default function PartsTable() {
                 >
                   <div className="column-name">Part Number</div>
                 </th>
-                <th className="text-start column-name col-auto" scope="col">
+                <th className="text-start column-name col-auto" scope="col"> {/* // NOTE: inconsistent */}
                   Description
                 </th>
               </tr>
