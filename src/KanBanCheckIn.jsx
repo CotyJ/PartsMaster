@@ -149,12 +149,12 @@ export default function KanBanCheckIn() {
                 )}
               </th>
 
-              <th
+              {/* <th
                 className="text-center col-1 text-nowrap column-name"
                 scope="col"
               >
                 Ordered?
-              </th>
+              </th> */}
 
               <th
                 className="text-center col-1 text-nowrap column-name"
@@ -173,7 +173,7 @@ export default function KanBanCheckIn() {
                 </th>
                 <td>{item.part_description}</td>
                 <td className="text-center">{item.date_added}</td>
-                <td className="text-center">
+                {/* <td className="text-center">
                   <li className="text-center ">
                     <button
                       className="btn btn-sm btn-primary text-nowrap fw-bold"
@@ -182,7 +182,7 @@ export default function KanBanCheckIn() {
                       {isOnOrder ? 'Ordered' : 'Order'}
                     </button>
                   </li>
-                </td>
+                </td> */}
                 <td className="text-center">
                   <button
                     className="btn btn-sm btn-primary text-nowrap fw-bold"
