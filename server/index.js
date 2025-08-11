@@ -156,24 +156,19 @@ app.get('/where_used', async (req, res) => {
     const { part_number } = req.query;
     const results = await db.query(
       `
-
-SELECT
-  ARRAY_AGG(DISTINCT w.bom_model) AS bom_models,
-  BOOL_OR(pm.in_production = 't') AS any_in_production,
-  EXISTS (
-    SELECT 1 FROM kanban_cards kc WHERE kc.part_number = $1
-  ) AS is_requested
-FROM
-  where_used w
-LEFT JOIN
-  production_models pm ON w.bom_model = pm.model
-WHERE
-  w.part_number = $1;
-
-
-
-
-`,
+      SELECT
+        ARRAY_AGG(DISTINCT w.bom_model) AS bom_models,
+        BOOL_OR(pm.in_production = 't') AS any_in_production,
+        EXISTS (
+          SELECT 1 FROM kanban_cards kc WHERE kc.part_number = $1
+        ) AS is_requested
+      FROM
+        where_used w
+      LEFT JOIN
+        production_models pm ON w.bom_model = pm.model
+      WHERE
+        w.part_number = $1;
+      `,
       [part_number]
     );
 
