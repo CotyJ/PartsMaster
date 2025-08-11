@@ -182,7 +182,6 @@ app.get('/where_used', async (req, res) => {
         is_on_order: false,
       });
     }
-
     res.json(results.rows[0]);
   } catch (error) {
     console.error(error);

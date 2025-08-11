@@ -1,15 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 export default function AccordionItem({ part }) {
   const [whereUsed, setWhereUsed] = useState([]);
   const [expandedPartId, setExpandedPartId] = useState(null);
-
-  // temporary to test status column
-  // const [isOnOrder, setisOnOrder] = useState(false);
-  const [isInProduction, setisInProduction] = useState(true);
-  const [isInReplenish, setisInReplenish] = useState(false);
-
   const filteredKeys = ['id', 'part_number', 'part_description'];
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -67,10 +61,7 @@ export default function AccordionItem({ part }) {
               borderRadius: '8px',
             }}
           >
-            {/* Dropdown section */}
-
             <div className="row flex-wrap">
-              {/* Where Used section */}
               <div className="col-2 col-sm-6 col-md-6 col-lg-2 order-1">
                 <h4
                   className="text-center"
@@ -86,8 +77,6 @@ export default function AccordionItem({ part }) {
                     ))}
                 </ul>
               </div>
-
-              {/* Status section */}
               <div className="col-2 col-sm-6 col-md-6 col-lg-3 order-2">
                 <h4
                   className="text-center"
@@ -131,8 +120,6 @@ export default function AccordionItem({ part }) {
                   </li>
                 </ul>
               </div>
-
-              {/* Details section */}
               <div className="col-8 col-sm-12 col-md-12 col-lg-7 order-3 order-sm-3 order-md-3">
                 <div className="row">
                   {Object.keys(part)
@@ -145,7 +132,6 @@ export default function AccordionItem({ part }) {
                       } else {
                         displayValue = value;
                       }
-
                       return displayValue ? (
                         <div key={key} className="col-6 mb-4">
                           <h4 style={{ borderBottom: '1px solid white' }}>
