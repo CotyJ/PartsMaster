@@ -7,7 +7,7 @@
     "create-seed-data": "python scripts/main.py",
     "seed-db": "psql -U postgres -d parts_db -f db/db_setup.sql",
     "build": "vite build",
-    "setup": "cp example.env && npm run create-seed-data && npm run seed-db",
+    "setup": "cp example.env .env && npm run create-seed-data && npm run seed-db",
     "start:backend": "node --watch server/index.js",
     "start": "concurrently \"npm run dev\" \"npm run start:backend\"",
     "lint": "eslint .",
