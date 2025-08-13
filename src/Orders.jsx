@@ -10,7 +10,7 @@ export default function Orders() {
   const get_orders_line_item = () => {
     const purchase_order_numbers = new Set();
     axios
-      .get(`${BASE_URL}/orders`)
+      .get(`${BASE_URL}/api/orders`)
       .then((response) => {
         const { data } = response;
         setOrdersLineItemData(data);

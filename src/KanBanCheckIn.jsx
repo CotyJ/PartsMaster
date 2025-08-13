@@ -14,7 +14,7 @@ export default function KanBanCheckIn() {
   // get cards
   const get_kanban_cards = () => {
     axios
-      .get(`${BASE_URL}/kanban`)
+      .get(`${BASE_URL}/api/kanban`)
       .then((results) => setKanbanList(results.data))
       .catch((err) => console.log(err));
   };
@@ -22,7 +22,7 @@ export default function KanBanCheckIn() {
   const card_checkin = (entry) => {
     if (entry.length == 10) {
       axios
-        .put(`${BASE_URL}/kanban/${entry}`)
+        .put(`${BASE_URL}/api/kanban/${entry}`)
         .then(() => get_kanban_cards())
         .catch((err) => console.error(err));
     }
@@ -31,7 +31,7 @@ export default function KanBanCheckIn() {
   // delete part from table
   const delete_card = (id) => {
     axios
-      .delete(`${BASE_URL}/kanban/${id}`)
+      .delete(`${BASE_URL}/api/kanban/${id}`)
       .then(get_kanban_cards())
       .catch((err) => console.log(err));
   };

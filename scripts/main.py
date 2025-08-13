@@ -1,3 +1,4 @@
+import generate_folders
 import generate_parts
 import generate_where_used
 import generate_production_models
@@ -6,6 +7,7 @@ import generate_inventory
 
 
 if __name__ == "__main__":
+  generate_folders.generate_data_folder()
   generate_parts.generate_parts_csv()
   generate_where_used.generate_where_used_csv()
   generate_production_models.generate_production_models_csv()
