@@ -9,7 +9,7 @@ export default function PartsTable() {
 
   const get_part = () => {
     axios
-      .get(`${BASE_URL}/parts?part_number=${searchEntry}`)
+      .get(`${BASE_URL}/api/parts?part_number=${searchEntry}`)
       .then((response) => setPartData(response.data))
       .catch((err) => console.log(err, ' Error getting part'))
       .finally();

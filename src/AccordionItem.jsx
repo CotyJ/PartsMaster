@@ -12,7 +12,7 @@ export default function AccordionItem({ part }) {
 
   const get_where_used = (part_number) => {
     axios
-      .get(`${BASE_URL}/where_used?part_number=${part_number}`)
+      .get(`${BASE_URL}/api/where_used?part_number=${part_number}`)
       .then(({ data }) => {
         const { any_in_production, bom_models, is_requested } = data;
         setisInProduction(any_in_production);
@@ -25,7 +25,7 @@ export default function AccordionItem({ part }) {
   const card_checkin = (entry) => {
     if (entry.length == 10) {
       axios
-        .put(`${BASE_URL}/kanban/${entry}`)
+        .put(`${BASE_URL}/api/kanban/${entry}`)
         .then(() => setisInReplenish(true))
         .catch((err) => console.error(err));
     }

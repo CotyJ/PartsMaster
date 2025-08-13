@@ -4,15 +4,15 @@ const db = require('../db');
 require('dotenv').config();
 const PORT = process.env.PORT || 9999;
 var cors = require('cors');
-
 app.use(cors());
 app.use(express.json());
+const apiRouter = express.Router();
 
 // When making a build
 // app.use(express.static(path.join(__dirname, '../public')));
 
 // Search
-app.get('/parts', async (req, res) => {
+apiRouter.get('/parts', async (req, res) => {
   try {
     const { part_number } = req.query;
     const results = await db.query(
@@ -82,7 +82,7 @@ app.get('/parts', async (req, res) => {
 });
 
 // Get kanban list
-app.get('/kanban', async (req, res) => {
+apiRouter.get('/kanban', async (req, res) => {
   try {
     const results = await db.query(`
       SELECT
@@ -104,7 +104,7 @@ app.get('/kanban', async (req, res) => {
 });
 
 // add kanban card
-app.put('/kanban/:part_number', async (req, res) => {
+apiRouter.put('/kanban/:part_number', async (req, res) => {
   try {
     const { part_number } = req.params;
     const results = await db.query(
@@ -129,7 +129,7 @@ app.put('/kanban/:part_number', async (req, res) => {
 });
 
 // Delete kanban card (check in)
-app.delete('/kanban/:id', async (req, res) => {
+apiRouter.delete('/kanban/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const results = await db.query(
@@ -151,7 +151,7 @@ app.delete('/kanban/:id', async (req, res) => {
 });
 
 // Get Where Used
-app.get('/where_used', async (req, res) => {
+apiRouter.get('/where_used', async (req, res) => {
   try {
     const { part_number } = req.query;
     const results = await db.query(
@@ -190,7 +190,7 @@ app.get('/where_used', async (req, res) => {
 });
 
 // Get inventory
-app.get('/inventory', async (req, res) => {
+apiRouter.get('/inventory', async (req, res) => {
   try {
     const results = await db.query(
       `SELECT
@@ -214,7 +214,7 @@ app.get('/inventory', async (req, res) => {
 });
 
 // Add to inventory
-app.put('/inventory/:part_number/:os_location', async (req, res) => {
+apiRouter.put('/inventory/:part_number/:os_location', async (req, res) => {
   try {
     const { part_number, os_location } = req.params;
     const results = await db.query(
@@ -235,7 +235,7 @@ app.put('/inventory/:part_number/:os_location', async (req, res) => {
 });
 
 // Delete from inventory
-app.delete('/inventory/:id', async (req, res) => {
+apiRouter.delete('/inventory/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const results = await db.query(
@@ -257,7 +257,7 @@ app.delete('/inventory/:id', async (req, res) => {
 });
 
 // Get all orders
-app.get('/orders', async (req, res) => {
+apiRouter.get('/orders', async (req, res) => {
   try {
     const results = await db.query(`
     SELECT
@@ -274,6 +274,8 @@ app.get('/orders', async (req, res) => {
     res.status(500).json({ error: 'Server error...' });
   }
 });
+
+app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

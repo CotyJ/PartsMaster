@@ -13,7 +13,7 @@ export default function Inventory() {
   const get_inventory = () => {
     const locations = new Set();
     axios
-      .get(`${BASE_URL}/inventory`)
+      .get(`${BASE_URL}/api/inventory`)
       .then((results) => {
         const { data } = results;
         setInventoryList(data);
@@ -34,7 +34,7 @@ export default function Inventory() {
 
     if (part_number.length == 10 && locationEntries.includes(os_location)) {
       axios
-        .put(`${BASE_URL}/inventory/${part_number}/${os_location}`)
+        .put(`${BASE_URL}/api/inventory/${part_number}/${os_location}`)
         .then(() => get_inventory())
         .catch((err) => console.error(err));
     } else {
@@ -47,7 +47,7 @@ export default function Inventory() {
     console.log(`Delete id ${id}`);
 
     axios
-      .delete(`${BASE_URL}/inventory/${id}`)
+      .delete(`${BASE_URL}/api/inventory/${id}`)
       .then(() => get_inventory())
       .catch((err) => console.log(err));
   };
