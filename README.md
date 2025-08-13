@@ -44,26 +44,12 @@ cd PartsMaster
 # 2. Install dependencies
 npm install
 
-# 3. Configure environment variables
-# Copy the example file to .env and adjust values if needed
-cp example.env .env
+# 3. Run the initial setup (creates .env, generates CSVs, creates DB/tables, seeds data)
+npm run setup
+# You may be prompted for your PostgreSQL password
 
-# 4. Generate CSV data
-python scripts/main.py
-
-# 5. Set up your PostgreSQL database
-# (Ensure PostgreSQL is running and env vars match your setup)
-psql -U postgres
-CREATE DATABASE parts_db;
-
-# 6. Seed the database with generated data
-psql -U postgres -d parts_db -f db/db_setup.sql
-
-# 7. Start the backend server
-npm run start-server
-
-# 8. Start the frontend development server
-npm run dev
+# 4. Start frontend + backend servers
+npm start
 ```
 
 
