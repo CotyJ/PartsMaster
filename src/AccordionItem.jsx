@@ -138,11 +138,11 @@ export default function AccordionItem({ part }) {
                         displayValue = value;
                       }
                       return displayValue ? (
-                        <div key={key} className="col-6 mb-4">
+                        <div key={key} className="col-6 mb-4 table-text" >
                           <h4 style={{ borderBottom: '1px solid white' }}>
                             {key}
                           </h4>
-                          <div style={{ overflow: 'auto' }}>{displayValue}</div>
+                          <div className='table-text' >{displayValue}</div>
                         </div>
                       ) : null;
                     })}
