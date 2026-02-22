@@ -53,8 +53,10 @@ export default function AccordionItem({ part }) {
         >
           {part.part_number}
         </td>
-        <td>{part.part_description}</td>
+        <td className='part-num-preview'>{part.part_description}</td>
       </tr>
+
+      {/* Content */}
       <tr id={`${part.id}`} className="collapse">
         <td colSpan={'2'} className="accordion-body">
           <div

@@ -5,8 +5,8 @@ export default function Layout() {
     <>
       <div className="container-fluid mx-0">
           <div className="row">
-            <div className="col-auto">
-              <nav className="row navbar d-flex justify-content-between mt-0 pt-0 align-items-start" id="nav-bar">
+            <div id="nav-dash-container" className="col-auto">
+              <nav id="nav-bar" className="row navbar d-flex justify-content-between mt-0 pt-0 align-items-start">
                 <ul className="navbar-nav">
                   {/* <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/">Home</NavLink></li> */}
                   <li className="nav-item navbar-text "><NavLink className="nav-link px-4" to="/parts-table">Parts Lookup</NavLink></li>
