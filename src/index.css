@@ -38,6 +38,8 @@ min-width: 15vw !important;
   font-weight: bold !important;
   padding: 10px 16px;
   transition: all 1s ease;
+  border-radius: 0px 10px 10px 0px;
+  color: white;
 }
 
 .nav-link:hover,
@@ -63,6 +65,13 @@ thead th {
 .table {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.table-text {
+  /* max-width: 100xpx; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .table::-webkit-scrollbar {
@@ -95,7 +104,6 @@ td.expanded {
   font-size: 1.2rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
   z-index: 10 !important;
-
 }
 
 .bd-callout {

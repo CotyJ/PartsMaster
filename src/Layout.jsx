@@ -17,9 +17,7 @@ export default function Layout() {
                 </ul>
               </nav>
             </div>
-          <div className="col m-2">
-            <Outlet />
-          </div>
+          <div className="col m-2"><Outlet /></div>
         </div>
       </div>
     </>
