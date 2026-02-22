@@ -1,16 +1,22 @@
+:root {
+  --primary_blue: rgb(37, 45, 139);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
   width: 100%;
-  color: white !important;
-}
-
-:root {
-  background-color: rgb(37, 45, 139) !important;
+  color: #f7f7f7f7 !important;
 }
 
 body {
-  background-color: rgb(37, 45, 139) !important;
+  background-color: var(--primary_blue) !important;
 }
 
 li {
@@ -18,26 +24,31 @@ li {
 }
 
 a {
-  color: white !important;
+  color: #f7f7f7f7 !important;
   text-decoration: none !important;
   font-size: x-large !important;
 }
 
-.nav-link {
-  font-weight: bold !important;
-}
-.nav-link:hover,
-.nav-link.active {
-  background-image: linear-gradient(
-    to right,
-    rgb(67 137 213),
-    rgb(37, 45, 139)
-  );
-  transition: background-image 0.3s ease-in-out;
+#nav-dash-container {
+max-width: 25vw !important;
+min-width: 15vw !important;
 }
 
-thead {
-  border: 2px solid;
+.nav-link {
+  font-weight: bold !important;
+  padding: 10px 16px;
+  transition: all 1s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: white;
+  background-image: linear-gradient(
+    90deg,
+    #3276c3,
+    var(--primary_blue)
+  );
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
 
 thead th {
@@ -46,10 +57,7 @@ thead th {
   background-color: #504f4f !important;
   z-index: 1;
   text-align: start;
-}
-
-table:hover {
-  overflow-y: scroll !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.19) !important;
 }
 
 .table {
@@ -76,8 +84,18 @@ td.expanded {
   font-size: 1.2rem;
 }
 
+.part-num-preview {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .column-name {
   font-size: 1.2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+  z-index: 10 !important;
+
 }
 
 .bd-callout {
@@ -90,6 +108,8 @@ td.expanded {
   border-left-width: 0.4rem;
   border-radius: 0.5rem;
   background-color: #4389d5;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.19) !important;
 }
 
 .bd-callout-primary {
@@ -102,7 +122,7 @@ td.expanded {
 
 .page-legend {
   border-bottom: 4px solid transparent;
-  border-image: linear-gradient(120deg, rgb(67 137 213), rgb(37, 45, 139)) 1;
+  border-image: linear-gradient(120deg, #4a90e2, var(--primary_blue)) 1;
   border-radius: 8px;
 }
 
@@ -111,6 +131,21 @@ td.expanded {
 }
 
 .btn-primary {
-  background-color:#0051cc !important;
-  border: 2px solid rgb(176, 176, 176) !important;
+  background-color: #3b64c4 !important;
+  border: 1px solid rgb(176, 176, 176) !important;
+  margin: 2px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, border 0.2s ease, box-shadow ease;
+}
+
+.btn-primary:disabled {
+  border: none !important;
+}
+
+
+.btn-primary:hover {
+  background-color: var(--primary_blue) !important;
+  margin: 1px;
+  border: 2px solid #dddddd !important;
+  color: #dddddd;
+  box-shadow: inset;
 }

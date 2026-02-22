@@ -53,7 +53,7 @@ export default function PartsTable() {
             <thead>
               <tr>
                 <th
-                  className="text-center column-name part-num-col"
+                  className="text-center part-num-col"
                   scope="col"
                 >
                   <div className="column-name">Part Number</div>
