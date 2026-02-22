@@ -34,8 +34,6 @@ PartsMaster processes part data for Bills Of Materials (BOMs). Each item is part
 
 ## Getting started
 
-
-
 ```bash
 # 1. Clone the repository
 git clone https://github.com/CotyJ/PartsMaster.git
@@ -51,6 +49,7 @@ npm run setup
 # 4. Start frontend + backend servers
 npm start
 ```
+
 
 
 ## Upcoming Features
