@@ -116,27 +116,42 @@ export default function AccordionItem({ part }) {
                   </li>
                 </ul>
               </div>
+
+              {/* Extra info table */}
               <div className="col-8 col-sm-12 col-md-12 col-lg-7 order-3 order-sm-3 order-md-3">
                 <div className="row">
-                  {Object.keys(part)
-                    .filter((key) => !filteredKeys.includes(key))
-                    .map((key) => {
-                      const value = part[key];
-                      let displayValue;
-                      if (typeof value == 'boolean') {
-                        displayValue = value ? <h5>✅</h5> : <h5>❌</h5>;
-                      } else {
-                        displayValue = value;
-                      }
-                      return displayValue ? (
-                        <div key={key} className="col-6 mb-4 table-text" >
-                          <h4 style={{ borderBottom: '1px solid white' }}>
-                            {key}
-                          </h4>
-                          <div className='table-text' >{displayValue}</div>
-                        </div>
-                      ) : null;
-                    })}
+                  <table className="table table-dark table-hover">
+                    <tbody>
+                      {Object.keys(part)
+                        .filter((key) => !filteredKeys.includes(key))
+                        .map((key) => {
+                          const value = part[key];
+                          let displayValue;
+                          if (typeof value == 'boolean') {
+                            displayValue = value ? (
+                              <strong style={{ color: 'rgb(0, 175, 0)' }}>
+                                Yes
+                              </strong>
+                            ) : (
+                              <strong style={{ color: 'red' }}>No</strong>
+                            );
+                          } else {
+                            displayValue = value;
+                          }
+                          return displayValue ? (
+                            <tr
+                              key={key}
+                              className="col-6 mb-4"
+                              style={{ border: '1px solid #aaa' }}
+                            >
+                              <td className="part-num-preview">{key}</td>
+                              <td>{displayValue}</td>
+                            </tr>
+                          ) :
+                          null;
+                        })}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

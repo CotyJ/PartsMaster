@@ -100,6 +100,7 @@ td.expanded {
   text-overflow: ellipsis;
 }
 
+
 .column-name {
   font-size: 1.2rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
