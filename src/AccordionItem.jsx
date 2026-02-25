@@ -46,14 +46,10 @@ export default function AccordionItem({ part }) {
           expand_item(part.id);
         }}
       >
-        <td
-          className={'text-center align-middle '.concat(
-            expandedPartId === part.id ? 'expanded' : ''
-          )}
-        >
+        <td className={'text-center align-middle '.concat(expandedPartId === part.id ? 'expanded' : '')}>
           {part.part_number}
         </td>
-        <td className='part-num-preview'>{part.part_description}</td>
+        <td className="part-num-preview">{part.part_description}</td>
       </tr>
 
       {/* Content */}
@@ -105,11 +101,6 @@ export default function AccordionItem({ part }) {
                     )}
                   </li>
                   <li className="text-center py-1">
-                    {/* {isOnOrder ? (
-                      <h5 className="text-nowrap">On order ❌</h5>
-                    ) : (
-                      <h5 className="text-nowrap">Not on order ✅</h5>
-                    )} */}
                   </li>
                   <li className="text-center py-1">
                     <button
@@ -117,7 +108,7 @@ export default function AccordionItem({ part }) {
                       value={part.part_number}
                       onClick={(e) => card_checkin(e.target.value)}
                       disabled={
-                        /*isOnOrder || */ !isInProduction || isInReplenish
+                        !isInProduction || isInReplenish
                       }
                     >
                       Request replenish
@@ -125,27 +116,42 @@ export default function AccordionItem({ part }) {
                   </li>
                 </ul>
               </div>
+
+              {/* Extra info table */}
               <div className="col-8 col-sm-12 col-md-12 col-lg-7 order-3 order-sm-3 order-md-3">
                 <div className="row">
-                  {Object.keys(part)
-                    .filter((key) => !filteredKeys.includes(key))
-                    .map((key) => {
-                      const value = part[key];
-                      let displayValue;
-                      if (typeof value == 'boolean') {
-                        displayValue = value ? <h5>✅</h5> : <h5>❌</h5>;
-                      } else {
-                        displayValue = value;
-                      }
-                      return displayValue ? (
-                        <div key={key} className="col-6 mb-4">
-                          <h4 style={{ borderBottom: '1px solid white' }}>
-                            {key}
-                          </h4>
-                          <div style={{ overflow: 'auto' }}>{displayValue}</div>
-                        </div>
-                      ) : null;
-                    })}
+                  <table className="table table-dark table-hover">
+                    <tbody>
+                      {Object.keys(part)
+                        .filter((key) => !filteredKeys.includes(key))
+                        .map((key) => {
+                          const value = part[key];
+                          let displayValue;
+                          if (typeof value == 'boolean') {
+                            displayValue = value ? (
+                              <strong style={{ color: 'rgb(0, 175, 0)' }}>
+                                Yes
+                              </strong>
+                            ) : (
+                              <strong style={{ color: 'red' }}>No</strong>
+                            );
+                          } else {
+                            displayValue = value;
+                          }
+                          return displayValue ? (
+                            <tr
+                              key={key}
+                              className="col-6 mb-4"
+                              style={{ border: '1px solid #aaa' }}
+                            >
+                              <td className="part-num-preview">{key}</td>
+                              <td>{displayValue}</td>
+                            </tr>
+                          ) :
+                          null;
+                        })}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
