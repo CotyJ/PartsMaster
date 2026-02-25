@@ -46,14 +46,10 @@ export default function AccordionItem({ part }) {
           expand_item(part.id);
         }}
       >
-        <td
-          className={'text-center align-middle '.concat(
-            expandedPartId === part.id ? 'expanded' : ''
-          )}
-        >
+        <td className={'text-center align-middle '.concat(expandedPartId === part.id ? 'expanded' : '')}>
           {part.part_number}
         </td>
-        <td className='part-num-preview'>{part.part_description}</td>
+        <td className="part-num-preview">{part.part_description}</td>
       </tr>
 
       {/* Content */}
@@ -105,11 +101,6 @@ export default function AccordionItem({ part }) {
                     )}
                   </li>
                   <li className="text-center py-1">
-                    {/* {isOnOrder ? (
-                      <h5 className="text-nowrap">On order ❌</h5>
-                    ) : (
-                      <h5 className="text-nowrap">Not on order ✅</h5>
-                    )} */}
                   </li>
                   <li className="text-center py-1">
                     <button
@@ -117,7 +108,7 @@ export default function AccordionItem({ part }) {
                       value={part.part_number}
                       onClick={(e) => card_checkin(e.target.value)}
                       disabled={
-                        /*isOnOrder || */ !isInProduction || isInReplenish
+                        !isInProduction || isInReplenish
                       }
                     >
                       Request replenish
