@@ -1,15 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from './Layout';
-import PartsTable from './PartsTable';
-import Home from './Home';
-import Orders from './Orders';
-import KanBanCheckIn from './KanBanCheckIn';
-import PartsReceiving from './PartsReceiving';
-import Inventory from './Inventory';
-import PurchaseOrders from './PurchaseOrders';
+import PartsTable from './components/PartsTable';
+import KanBanCheckIn from './pages/KanBanCheckIn';
+import PartsReceiving from './components/PartsReceiving';
+import Inventory from './pages/Inventory';
+import Orders from './pages/Orders';
+import PurchaseOrders from './pages/PurchaseOrders';
 
-import './App.css';
+import './styles/App.css';
 
 function App() {
   // TODO: App is just a middle-man for main.jsx, all of this content can just be moved there
@@ -18,7 +17,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<Home />} />  */}
           <Route index path="parts-table" element={<PartsTable />}/>
           <Route path="orders" element={<Orders />}/>
           <Route path="kb-checkin" element={<KanBanCheckIn />}/>
