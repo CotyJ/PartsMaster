@@ -10,14 +10,25 @@ export default function AccordionItem({ part }) {
   const [isInProduction, setisInProduction] = useState(true);
   const [isInReplenish, setisInReplenish] = useState(true);
 
+  const [designators, setDesignators] = useState([]);
+
   const get_where_used = (part_number) => {
     axios
       .get(`${BASE_URL}/api/where_used?part_number=${part_number}`)
       .then(({ data }) => {
-        const { any_in_production, bom_models, is_requested } = data;
-        setisInProduction(any_in_production);
+        const { in_production, models_used_in, is_requested, reference_designator } = data;
+        setisInProduction(in_production);
         setisInReplenish(is_requested);
-        setWhereUsed(bom_models);
+        setWhereUsed(models_used_in);
+
+        // format refdes
+        let new_references = [];
+
+        reference_designator.forEach((item, i) => {
+          new_references[i] = ` ${item}`
+        })
+        setDesignators(new_references);
+
       })
       .catch((err) => console.error(err, 'Error getting part usage info'));
   };
@@ -74,7 +85,7 @@ export default function AccordionItem({ part }) {
                   {whereUsed
                     .filter((item) => item)
                     .map((item) => (
-                      <li key={item} className="text-center">{`${item}`}</li>
+                      <li key={item} title={designators} className="text-center">{`${item}`}</li>
                     ))}
                 </ul>
               </div>
