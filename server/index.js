@@ -156,23 +156,26 @@ apiRouter.get('/where_used', async (req, res) => {
     const { part_number } = req.query;
     const results = await db.query(
       `
-      SELECT
-        ARRAY_AGG(DISTINCT w.bom_model) AS bom_models,
-        BOOL_OR(pm.in_production = 't') AS any_in_production,
-        EXISTS (
-          SELECT 1 FROM kanban_cards kc WHERE kc.part_number = $1
-        ) AS is_requested
-      FROM
-        where_used w
-      LEFT JOIN
-        production_models pm ON w.bom_model = pm.model
-      WHERE
-        w.part_number = $1;
+        SELECT
+          w.bom_model,
+          BOOL_OR(pm.in_production = 't') AS in_production,
+          ARRAY_AGG(DISTINCT w.reference_designator) AS reference_designators,
+          EXISTS (
+            SELECT 1 FROM kanban_cards kc WHERE kc.part_number = $1
+          ) AS is_requested
+        FROM
+          where_used w
+        LEFT JOIN
+          production_models pm ON w.bom_model = pm.model
+        WHERE
+          w.part_number = $1
+        GROUP BY
+          w.bom_model;
       `,
       [part_number]
     );
 
-    // If no rows returned, send defaults:
+    // No rows returned → send defaults
     if (results.rows.length === 0) {
       return res.json({
         part_number,
@@ -180,9 +183,23 @@ apiRouter.get('/where_used', async (req, res) => {
         is_in_production: false,
         is_requested: false,
         is_on_order: false,
+        reference_designator: []
       });
     }
-    res.json(results.rows[0]);
+
+    // Aggregate values safely
+    const modelsUsedIn = results.rows.map(r => r.bom_model);
+    const isInProduction = results.rows.some(r => r.in_production);
+    const referenceDesignator = results.rows.flatMap(r => r.reference_designators);
+
+    res.json({
+      part_number,
+      models_used_in: modelsUsedIn,
+      is_in_production: isInProduction || false,
+      is_requested: results.rows[0]?.is_requested || false,
+      is_on_order: false,
+      reference_designator: referenceDesignator
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error...' });
