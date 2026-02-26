@@ -83,6 +83,13 @@ td.expanded {
   font-size: large;
 }
 
+#info-table {
+  max-height: 240px;
+  overflow: scroll;
+  overflow-x: hidden;
+  border: 1px solid white;
+}
+
 .part-num-col {
   width: 10rem !important;
   max-width: 10rem !important;
