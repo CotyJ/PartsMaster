@@ -129,7 +129,7 @@ export default function AccordionItem({ part }) {
               </div>
 
               {/* Extra info table */}
-              <div className="col-8 col-sm-12 col-md-12 col-lg-7 order-3 order-sm-3 order-md-3">
+              <div id="info-table" className="col-8 col-sm-12 col-md-12 col-lg-7 order-3 order-sm-3 order-md-3">
                 <div className="row">
                   <table className="table table-dark table-hover">
                     <tbody>
