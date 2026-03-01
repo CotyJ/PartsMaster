@@ -74,7 +74,9 @@ export default function AccordionItem({ part }) {
             }}
           >
             <div className="row flex-wrap">
-              <div className="col-2 col-sm-6 col-md-6 col-lg-2 order-1">
+
+              {/* Where Used */}
+              <div id='where-used-info' className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-2 order-1">
                 <h4
                   className="text-center"
                   style={{ borderBottom: '1px solid white' }}
@@ -89,7 +91,9 @@ export default function AccordionItem({ part }) {
                     ))}
                 </ul>
               </div>
-              <div className="col-2 col-sm-6 col-md-6 col-lg-3 order-2 pe-4">
+
+              {/* Request */}
+              <div id='request-info'    className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-2 order-2">
                 <h4
                   className="text-center"
                   style={{ borderBottom: '1px solid white' }}
@@ -128,8 +132,23 @@ export default function AccordionItem({ part }) {
                 </ul>
               </div>
 
+              {/* Inventory */}
+              <div id='inventory-info'  className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-2 order-3 order-sm-3 order-md-3">
+                <h4
+                  className="text-center"
+                  style={{ borderBottom: '1px solid white' }}
+                >
+                  Status
+                </h4>
+
+
+                <div className='row'><a href='here/there.pdf'>here</a></div>
+                <div className='row'><a href='here/there.pdf'>there</a></div>
+                <div className='row'><a href='here/there.pdf'>somewhere</a></div>
+              </div>
+
               {/* Extra info table */}
-              <div id="info-table" className="col-8 col-sm-12 col-md-12 col-lg-7 order-3 order-sm-3 order-md-3">
+              <div id="info-table"      className="col-5 col-xs-12 col-sm-12 col-md-12 col-lg-6 order-3 order-sm-3 order-md-3">
                 <div className="row">
                   <table className="table table-dark table-hover">
                     <tbody>
@@ -176,6 +195,7 @@ export default function AccordionItem({ part }) {
                   </table>
                 </div>
               </div>
+
             </div>
           </div>
         </td>
