@@ -200,8 +200,8 @@ apiRouter.get('/where_used', async (req, res) => {
       is_on_order: false,
       reference_designator: referenceDesignator
     });
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.err(err);
     res.status(500).json({ error: 'Server error...' });
   }
 });
@@ -224,8 +224,8 @@ apiRouter.get('/inventory', async (req, res) => {
       `
     );
     res.json(results.rows);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Server error...' });
   }
 });
@@ -286,7 +286,7 @@ apiRouter.get('/orders', async (req, res) => {
       part_number ASC
     `);
     res.json(results.rows);
-  } catch (error) {
+  } catch (err) {
     console.log(err);
     res.status(500).json({ error: 'Server error...' });
   }

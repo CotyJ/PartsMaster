@@ -16,19 +16,21 @@ export default function AccordionItem({ part }) {
     axios
       .get(`${BASE_URL}/api/where_used?part_number=${part_number}`)
       .then(({ data }) => {
-        const { is_in_production, models_used_in, is_requested, reference_designator } = data;
+        const {
+          is_in_production,
+          models_used_in,
+          is_requested,
+          reference_designator,
+        } = data;
         setisInProduction(is_in_production);
         setisInReplenish(is_requested);
         setWhereUsed(models_used_in);
 
-        // format refdes
         let new_references = [];
-
         reference_designator.forEach((item, i) => {
-          new_references[i] = ` ${item}`
-        })
+          new_references[i] = ` ${item}`;
+        });
         setDesignators(new_references);
-
       })
       .catch((err) => console.error(err, 'Error getting part usage info'));
   };
@@ -57,7 +59,11 @@ export default function AccordionItem({ part }) {
           expand_item(part.id);
         }}
       >
-        <td className={'text-center align-middle '.concat(expandedPartId === part.id ? 'expanded' : '')}>
+        <td
+          className={'text-center align-middle '.concat(
+            expandedPartId === part.id ? 'expanded' : '',
+          )}
+        >
           {part.part_number}
         </td>
         <td>{part.part_description}</td>
@@ -74,12 +80,11 @@ export default function AccordionItem({ part }) {
             }}
           >
             <div className="row flex-wrap">
-
               {/* Where Used */}
               <div id="where-used-info" className="col-auto order-1">
                 <h4
                   className="text-center"
-                  style={{ borderBottom: "1px solid white" }}
+                  style={{ borderBottom: '1px solid white' }}
                 >
                   Used in
                 </h4>
@@ -87,16 +92,20 @@ export default function AccordionItem({ part }) {
                   {whereUsed
                     .filter((item) => item)
                     .map((item) => (
-                      <li key={item} title={designators} className="text-center">{`${item}`}</li>
+                      <li
+                        key={item}
+                        title={designators}
+                        className="text-center"
+                      >{`${item}`}</li>
                     ))}
                 </ul>
               </div>
 
               {/* Request */}
-              <div id="request-info"    className="col-2 order-2">
+              <div id="request-info" className="col-2 order-2">
                 <h4
                   className="text-center"
-                  style={{ borderBottom: "1px solid white" }}
+                  style={{ borderBottom: '1px solid white' }}
                 >
                   Status
                 </h4>
@@ -115,16 +124,13 @@ export default function AccordionItem({ part }) {
                       <h5 className="text-nowrap">OBSOLETE ❌</h5>
                     )}
                   </li>
-                  <li className="text-center py-1">
-                  </li>
+                  <li className="text-center py-1"></li>
                   <li className="text-center py-1">
                     <button
                       className="btn btn-primary text-nowrap fw-bold"
                       value={part.part_number}
                       onClick={(e) => card_checkin(e.target.value)}
-                      disabled={
-                        !isInProduction || isInReplenish
-                      }
+                      disabled={!isInProduction || isInReplenish}
                     >
                       Request replenish
                     </button>
@@ -133,22 +139,15 @@ export default function AccordionItem({ part }) {
               </div>
 
               {/* Inventory */}
-              <div id="inventory-info"  className="col-1 me-4 order-3">
-                <h4
-                  className="text-center"
-                  style={{ borderBottom: "1px solid white" }}
-                >
-                  Status
-                </h4>
-
-
+              <div id="inventory-info" className="col-1 me-4 order-3">
+                <h4 className="text-center" style={{ borderBottom: '1px solid white' }}>Status</h4>
                 <div className="row"><a href="here/there.pdf">here</a></div>
                 <div className="row"><a href="here/there.pdf">there</a></div>
                 <div className="row"><a href="here/there.pdf">somewhere</a></div>
               </div>
 
               {/* Extra info table */}
-              <div id="info-table"      className="col order-4">
+              <div id="info-table" className="col order-4">
                 <div className="row">
                   <table className="table table-dark table-hover">
                     <tbody>
@@ -157,45 +156,42 @@ export default function AccordionItem({ part }) {
                         .map((key) => {
                           const value = part[key];
                           let displayValue;
-                          if (typeof value == "boolean") {
+                          if (typeof value == 'boolean') {
                             displayValue = value ? (
-                              <strong style={{ color: "rgb(0, 175, 0)" }}>
-                                Yes
-                              </strong>
+                              <strong style={{ color: 'rgb(0, 175, 0)' }}>Yes</strong>
                             ) : (
-                              <strong style={{ color: "red" }}>No</strong>
+                              <strong style={{ color: 'red' }}>No</strong>
                             );
                           }
-                          if (typeof value == "string") {
+                          if (typeof value == 'string') {
                             displayValue = value;
                             if (
-                              value.slice(value.length - 4, value.length) == ".pdf" ||
-                              value.slice(value.length - 7, value.length) == ".PcbLib" ||
-                              value.slice(value.length - 7, value.length) == ".SchLib"
+                              value.slice(value.length - 4, value.length) == '.pdf'    ||
+                              value.slice(value.length - 7, value.length) == '.PcbLib' ||
+                              value.slice(value.length - 7, value.length) == '.SchLib'
                             ) {
-                              displayValue = <a href={`${value}`} style={{fontSize: "small"}}>{value}</a>
+                              displayValue = (
+                                <a href={`${value}`} style={{ fontSize: 'small' }}>{value}</a>
+                              );
                             }
-                          }
-                          else {
+                          } else {
                             displayValue = value;
                           }
                           return displayValue ? (
                             <tr
                               key={key}
                               className="col-auto mb-4"
-                              style={{ border: "1px solid #aaa" }}
+                              style={{ border: '1px solid #aaa' }}
                             >
                               <td className="part-num-preview">{key}</td>
                               <td>{displayValue}</td>
                             </tr>
-                          ) :
-                          null;
+                          ) : null;
                         })}
                     </tbody>
                   </table>
                 </div>
               </div>
-
             </div>
           </div>
         </td>
