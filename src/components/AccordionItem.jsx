@@ -16,8 +16,8 @@ export default function AccordionItem({ part }) {
     axios
       .get(`${BASE_URL}/api/where_used?part_number=${part_number}`)
       .then(({ data }) => {
-        const { in_production, models_used_in, is_requested, reference_designator } = data;
-        setisInProduction(in_production);
+        const { is_in_production, models_used_in, is_requested, reference_designator } = data;
+        setisInProduction(is_in_production);
         setisInReplenish(is_requested);
         setWhereUsed(models_used_in);
 
@@ -89,7 +89,7 @@ export default function AccordionItem({ part }) {
                     ))}
                 </ul>
               </div>
-              <div className="col-2 col-sm-6 col-md-6 col-lg-3 order-2">
+              <div className="col-2 col-sm-6 col-md-6 col-lg-3 order-2 pe-4">
                 <h4
                   className="text-center"
                   style={{ borderBottom: '1px solid white' }}
