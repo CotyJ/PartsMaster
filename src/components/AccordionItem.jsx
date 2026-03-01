@@ -60,7 +60,7 @@ export default function AccordionItem({ part }) {
         <td className={'text-center align-middle '.concat(expandedPartId === part.id ? 'expanded' : '')}>
           {part.part_number}
         </td>
-        <td className="part-num-preview">{part.part_description}</td>
+        <td>{part.part_description}</td>
       </tr>
 
       {/* Content */}
@@ -76,10 +76,10 @@ export default function AccordionItem({ part }) {
             <div className="row flex-wrap">
 
               {/* Where Used */}
-              <div id='where-used-info' className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-2 order-1">
+              <div id="where-used-info" className="col-auto order-1">
                 <h4
                   className="text-center"
-                  style={{ borderBottom: '1px solid white' }}
+                  style={{ borderBottom: "1px solid white" }}
                 >
                   Used in
                 </h4>
@@ -93,10 +93,10 @@ export default function AccordionItem({ part }) {
               </div>
 
               {/* Request */}
-              <div id='request-info'    className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-2 order-2">
+              <div id="request-info"    className="col-2 order-2">
                 <h4
                   className="text-center"
-                  style={{ borderBottom: '1px solid white' }}
+                  style={{ borderBottom: "1px solid white" }}
                 >
                   Status
                 </h4>
@@ -133,22 +133,22 @@ export default function AccordionItem({ part }) {
               </div>
 
               {/* Inventory */}
-              <div id='inventory-info'  className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-2 order-3 order-sm-3 order-md-3">
+              <div id="inventory-info"  className="col-1 me-4 order-3">
                 <h4
                   className="text-center"
-                  style={{ borderBottom: '1px solid white' }}
+                  style={{ borderBottom: "1px solid white" }}
                 >
                   Status
                 </h4>
 
 
-                <div className='row'><a href='here/there.pdf'>here</a></div>
-                <div className='row'><a href='here/there.pdf'>there</a></div>
-                <div className='row'><a href='here/there.pdf'>somewhere</a></div>
+                <div className="row"><a href="here/there.pdf">here</a></div>
+                <div className="row"><a href="here/there.pdf">there</a></div>
+                <div className="row"><a href="here/there.pdf">somewhere</a></div>
               </div>
 
               {/* Extra info table */}
-              <div id="info-table"      className="col-5 col-xs-12 col-sm-12 col-md-12 col-lg-6 order-3 order-sm-3 order-md-3">
+              <div id="info-table"      className="col order-4">
                 <div className="row">
                   <table className="table table-dark table-hover">
                     <tbody>
@@ -157,23 +157,23 @@ export default function AccordionItem({ part }) {
                         .map((key) => {
                           const value = part[key];
                           let displayValue;
-                          if (typeof value == 'boolean') {
+                          if (typeof value == "boolean") {
                             displayValue = value ? (
-                              <strong style={{ color: 'rgb(0, 175, 0)' }}>
+                              <strong style={{ color: "rgb(0, 175, 0)" }}>
                                 Yes
                               </strong>
                             ) : (
-                              <strong style={{ color: 'red' }}>No</strong>
+                              <strong style={{ color: "red" }}>No</strong>
                             );
                           }
-                          if (typeof value == 'string') {
+                          if (typeof value == "string") {
                             displayValue = value;
                             if (
-                              value.slice(value.length - 4, value.length) == '.pdf' ||
-                              value.slice(value.length - 7, value.length) == '.PcbLib' ||
-                              value.slice(value.length - 7, value.length) == '.SchLib'
+                              value.slice(value.length - 4, value.length) == ".pdf" ||
+                              value.slice(value.length - 7, value.length) == ".PcbLib" ||
+                              value.slice(value.length - 7, value.length) == ".SchLib"
                             ) {
-                              displayValue = <a href={`${value}`} style={{fontSize: 'small'}}>{value}</a>
+                              displayValue = <a href={`${value}`} style={{fontSize: "small"}}>{value}</a>
                             }
                           }
                           else {
@@ -182,8 +182,8 @@ export default function AccordionItem({ part }) {
                           return displayValue ? (
                             <tr
                               key={key}
-                              className="col-6 mb-4"
-                              style={{ border: '1px solid #aaa' }}
+                              className="col-auto mb-4"
+                              style={{ border: "1px solid #aaa" }}
                             >
                               <td className="part-num-preview">{key}</td>
                               <td>{displayValue}</td>

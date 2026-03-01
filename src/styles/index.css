@@ -29,13 +29,28 @@ a {
   text-decoration: underline !important;
 }
 
-#info-table a:hover {
+a:hover {
+  color: rgb(56, 56, 255) !important;
+
+}
+
+a:hover {
   color: rgb(56, 56, 255) !important;
 }
 
 #nav-dash-container {
 max-width: 25vw !important;
 min-width: 15vw !important;
+}
+
+#where-used-info {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#inventory-info {
+  min-width: 80px;
 }
 
 .nav-link {
@@ -50,7 +65,7 @@ min-width: 15vw !important;
 
 .nav-link:hover,
 .nav-link.active {
-  color: white;
+  color: white !important;
   background-image: linear-gradient(
     90deg,
     #3276c3,
@@ -90,10 +105,15 @@ td.expanded {
 }
 
 #info-table {
+  min-width: 240px !important;
   max-height: 240px;
   overflow: scroll;
   overflow-x: hidden;
   border: 1px solid white;
+}
+
+#request-info {
+  min-width: 240px;
 }
 
 .part-num-col {
@@ -107,7 +127,8 @@ td.expanded {
 }
 
 .part-num-preview {
-  max-width: 100px;
+  width: 40px !important;
+  max-width: 180px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
