@@ -29,6 +29,15 @@ a {
   font-size: x-large !important;
 }
 
+#info-table a {
+  font-size: medium !important;
+  text-decoration: underline !important;
+}
+
+#info-table a:hover {
+  color: rgb(56, 56, 255) !important;
+}
+
 #nav-dash-container {
 max-width: 25vw !important;
 min-width: 15vw !important;

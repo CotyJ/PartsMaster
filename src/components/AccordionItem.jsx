@@ -146,7 +146,18 @@ export default function AccordionItem({ part }) {
                             ) : (
                               <strong style={{ color: 'red' }}>No</strong>
                             );
-                          } else {
+                          }
+                          if (typeof value == 'string') {
+                            displayValue = value;
+                            if (
+                              value.slice(value.length - 4, value.length) == '.pdf' ||
+                              value.slice(value.length - 7, value.length) == '.PcbLib' ||
+                              value.slice(value.length - 7, value.length) == '.SchLib'
+                            ) {
+                              displayValue = <a href={`${value}`} style={{fontSize: 'small'}}>{value}</a>
+                            }
+                          }
+                          else {
                             displayValue = value;
                           }
                           return displayValue ? (
