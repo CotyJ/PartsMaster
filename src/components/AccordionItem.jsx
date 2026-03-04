@@ -181,7 +181,7 @@ export default function AccordionItem({ part }) {
                             <tr
                               key={key}
                               className="col-auto mb-4"
-                              style={{ border: '1px solid #aaa' }}
+                              // style={{ border: '1px solid #aaa' }}
                             >
                               <td className="part-num-preview">{key}</td>
                               <td>{displayValue}</td>
