@@ -144,7 +144,7 @@ export default function Inventory() {
                   <th scope="row" className="text-center align-middle">
                     {item.part_number}
                   </th>
-                  <td>{item.part_description}</td>
+                  <td className='table-text'>{item.part_description}</td>
                   <td className="text-center">{item.os_location}</td>
                   <td className="text-center">
                     <button

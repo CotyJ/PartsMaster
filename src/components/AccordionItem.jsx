@@ -139,15 +139,23 @@ export default function AccordionItem({ part }) {
               </div>
 
               {/* Inventory */}
-              <div id="inventory-info" className="col-1 me-4 order-3">
+              <div id="inventory-info" className="col-1 me-1 order-3">
                 <h4 className="text-center" style={{ borderBottom: '1px solid white' }}>Orders</h4>
-                <div className="row"><a href="somePO/num.pdf">200029</a></div>
-                <div className="row"><a href="somePO/num.pdf">200044</a></div>
-                <div className="row"><a href="somePO/num.pdf">200046</a></div>
+                <div className=""><a href="somePO/num.pdf">200029</a></div>
+                <div className=""><a href="somePO/num.pdf">200044</a></div>
+                <div className=""><a href="somePO/num.pdf">200046</a></div>
+              </div>
+
+              <div className="col-1 me-1 order-4">
+                <h4 className="text-center" style={{ borderBottom: '1px solid white' }}>OS</h4>
+                <div className="">EW-3Nb</div>
+                <div className="">AE-1Sa</div>
+                <div className="">AW-3Na</div>
+
               </div>
 
               {/* Extra info table */}
-              <div id="info-table" className="col order-4">
+              <div id="info-table" className="col order-5">
                 <div className="row">
                   <table className="table table-striped table-dark table-hover">
                     <tbody>
