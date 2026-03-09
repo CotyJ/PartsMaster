@@ -140,10 +140,10 @@ export default function AccordionItem({ part }) {
 
               {/* Inventory */}
               <div id="inventory-info" className="col-1 me-4 order-3">
-                <h4 className="text-center" style={{ borderBottom: '1px solid white' }}>Status</h4>
-                <div className="row"><a href="here/there.pdf">here</a></div>
-                <div className="row"><a href="here/there.pdf">there</a></div>
-                <div className="row"><a href="here/there.pdf">somewhere</a></div>
+                <h4 className="text-center" style={{ borderBottom: '1px solid white' }}>Orders</h4>
+                <div className="row"><a href="somePO/num.pdf">200029</a></div>
+                <div className="row"><a href="somePO/num.pdf">200044</a></div>
+                <div className="row"><a href="somePO/num.pdf">200046</a></div>
               </div>
 
               {/* Extra info table */}
