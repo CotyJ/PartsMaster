@@ -127,15 +127,9 @@ export default function Inventory() {
                 >
                   <div className="column-name">Part Number</div>
                 </th>
-                <th className="text-start column-name col-auto" scope="col">
-                  Description
-                </th>
-                <th className="text-center column-name col-auto" scope="col">
-                  Location
-                </th>
-                <th className="text-center column-name col-1" scope="col">
-                  Delete
-                </th>
+                <th className="text-start column-name col-auto" scope="col">Description</th>
+                <th className="text-center column-name col-1" scope="col">Location</th>
+                <th className="text-center column-name col-1" scope="col">Delete</th>
               </tr>
             </thead>
             <tbody>
