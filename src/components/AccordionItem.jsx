@@ -66,7 +66,7 @@ export default function AccordionItem({ part }) {
         >
           {part.part_number}
         </td>
-        <td>{part.part_description}</td>
+        <td className='table-text'>{part.part_description}</td>
       </tr>
 
       {/* Content */}

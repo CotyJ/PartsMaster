@@ -44,9 +44,9 @@ min-width: 15vw !important;
 }
 
 #where-used-info {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 #inventory-info {
@@ -89,10 +89,10 @@ thead th {
 }
 
 .table-text {
-  /* max-width: 100xpx; */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: 100px;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .table::-webkit-scrollbar {
@@ -129,9 +129,9 @@ td.expanded {
 .part-num-preview {
   width: 40px !important;
   max-width: 180px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 

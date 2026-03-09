@@ -171,7 +171,7 @@ export default function KanBanCheckIn() {
                 <th scope="row" className="text-center align-middle">
                   {item.part_number}
                 </th>
-                <td>{item.part_description}</td>
+                <td className='table-text'>{item.part_description}</td>
                 <td className="text-center">{item.date_added}</td>
                 {/* <td className="text-center">
                   <li className="text-center ">
