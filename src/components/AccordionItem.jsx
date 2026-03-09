@@ -149,7 +149,7 @@ export default function AccordionItem({ part }) {
               {/* Extra info table */}
               <div id="info-table" className="col order-4">
                 <div className="row">
-                  <table className="table table-dark table-hover">
+                  <table className="table table-striped table-dark table-hover">
                     <tbody>
                       {Object.keys(part)
                         .filter((key) => !filteredKeys.includes(key))
